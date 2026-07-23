@@ -449,6 +449,17 @@ Welcome all forms of contribution!
 
 ---
 
+## JistAI Modified Version Source
+
+This repository is a JistAI modified version based on
+`QuantumNous/new-api v1.0.0-rc.21`, including the JistAI homepage and model
+request concurrency limits. The corresponding public source repository is:
+
+[https://github.com/liuyingcai/new-api-jistai](https://github.com/liuyingcai/new-api-jistai)
+
+The modified version remains available under AGPLv3. See `LICENSE`, `NOTICE`,
+and `THIRD-PARTY-LICENSES.md` in this repository.
+
 ## 📜 License
 
 This project is licensed under the [GNU Affero General Public License v3.0 (AGPLv3)](./LICENSE).
