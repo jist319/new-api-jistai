@@ -3830,6 +3830,17 @@
     "默认折叠侧边栏": "Default collapse sidebar",
     "默认测试模型": "Default Test Model",
     "默认用户消息": "Default User Message",
-    "默认补全倍率": "Default completion ratio"
+    "默认补全倍率": "Default completion ratio",
+    "{\n  \"default\": 5,\n  \"vip\": 20\n}": "{\n  \"default\": 5,\n  \"vip\": 20\n}",
+    "使用 JSON 对象格式，格式为：{\"组名\": 最大并发数}": "Use a JSON object in the following format: {\"group name\": maximum concurrency}",
+    "保存模型请求限制": "Save model request limits",
+    "分组并发限制": "Group-based concurrency limits",
+    "分组并发限制必须是 JSON 对象，分组名称不能为空，且每个值必须是 0 到 2147483647 之间的整数": "Group concurrency limits must be a JSON object with non-empty group names, and each value must be an integer from 0 to 2147483647",
+    "同一用户所有 API 密钥正在处理的模型请求总数，0 代表不限制；此设置独立于速率限制。": "Total in-flight model requests across all API keys for one user. 0 means unlimited; this setting is independent of rate limiting.",
+    "并发限制必须是 0 到 2147483647 之间的整数": "The concurrency limit must be an integer from 0 to 2147483647",
+    "未配置的分组继承全局并发限制，显式配置 0 代表不限制。": "Groups without an explicit setting inherit the global concurrency limit; explicitly setting 0 means unlimited.",
+    "模型请求速率与并发限制": "Model request rate and concurrency limits",
+    "每个最大并发数必须是 0 到 2147483647 之间的整数。": "Each maximum concurrency value must be an integer from 0 to 2147483647.",
+    "用户最大并发请求数": "Maximum concurrent requests per user"
   }
 }

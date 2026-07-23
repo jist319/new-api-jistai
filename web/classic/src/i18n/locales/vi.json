@@ -4218,6 +4218,17 @@
     "默认折叠侧边栏": "Mặc định thu gọn thanh bên",
     "默认测试模型": "Mô hình kiểm tra mặc định",
     "默认用户消息": "Xin chào",
-    "默认补全倍率": "Tỷ lệ hoàn thành mặc định"
+    "默认补全倍率": "Tỷ lệ hoàn thành mặc định",
+    "{\n  \"default\": 5,\n  \"vip\": 20\n}": "{\n  \"default\": 5,\n  \"vip\": 20\n}",
+    "使用 JSON 对象格式，格式为：{\"组名\": 最大并发数}": "Sử dụng đối tượng JSON theo định dạng: {\"tên nhóm\": số yêu cầu đồng thời tối đa}",
+    "保存模型请求限制": "Lưu giới hạn yêu cầu mô hình",
+    "分组并发限制": "Giới hạn yêu cầu đồng thời theo nhóm",
+    "分组并发限制必须是 JSON 对象，分组名称不能为空，且每个值必须是 0 到 2147483647 之间的整数": "Giới hạn yêu cầu đồng thời theo nhóm phải là đối tượng JSON có tên nhóm không được để trống và mỗi giá trị phải là số nguyên từ 0 đến 2147483647",
+    "同一用户所有 API 密钥正在处理的模型请求总数，0 代表不限制；此设置独立于速率限制。": "Tổng số yêu cầu mô hình đang xử lý của một người dùng trên tất cả khóa API. 0 nghĩa là không giới hạn; thiết lập này độc lập với giới hạn tốc độ.",
+    "并发限制必须是 0 到 2147483647 之间的整数": "Giới hạn yêu cầu đồng thời phải là số nguyên từ 0 đến 2147483647",
+    "未配置的分组继承全局并发限制，显式配置 0 代表不限制。": "Các nhóm chưa cấu hình kế thừa giới hạn yêu cầu đồng thời toàn cục; đặt rõ 0 nghĩa là không giới hạn.",
+    "模型请求速率与并发限制": "Giới hạn tốc độ và yêu cầu đồng thời của mô hình",
+    "每个最大并发数必须是 0 到 2147483647 之间的整数。": "Mỗi giá trị yêu cầu đồng thời tối đa phải là số nguyên từ 0 đến 2147483647.",
+    "用户最大并发请求数": "Số yêu cầu đồng thời tối đa cho mỗi người dùng"
   }
 }

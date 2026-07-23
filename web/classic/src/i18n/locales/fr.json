@@ -3684,6 +3684,17 @@
     "默认折叠侧边栏": "Réduire la barre latérale par défaut",
     "默认测试模型": "Modèle de test par défaut",
     "默认用户消息": "Bonjour",
-    "默认补全倍率": "Taux de complétion par défaut"
+    "默认补全倍率": "Taux de complétion par défaut",
+    "{\n  \"default\": 5,\n  \"vip\": 20\n}": "{\n  \"default\": 5,\n  \"vip\": 20\n}",
+    "使用 JSON 对象格式，格式为：{\"组名\": 最大并发数}": "Utilisez un objet JSON au format suivant : {\"nom du groupe\": nombre maximal de requêtes simultanées}",
+    "保存模型请求限制": "Enregistrer les limites de requêtes de modèle",
+    "分组并发限制": "Limites de requêtes simultanées par groupe",
+    "分组并发限制必须是 JSON 对象，分组名称不能为空，且每个值必须是 0 到 2147483647 之间的整数": "Les limites de requêtes simultanées par groupe doivent être un objet JSON avec des noms de groupe non vides, et chaque valeur doit être un entier compris entre 0 et 2147483647",
+    "同一用户所有 API 密钥正在处理的模型请求总数，0 代表不限制；此设置独立于速率限制。": "Nombre total de requêtes de modèle en cours pour un utilisateur, toutes clés API confondues. 0 signifie illimité ; ce réglage est indépendant de la limitation de débit.",
+    "并发限制必须是 0 到 2147483647 之间的整数": "La limite de requêtes simultanées doit être un entier compris entre 0 et 2147483647",
+    "未配置的分组继承全局并发限制，显式配置 0 代表不限制。": "Les groupes sans réglage explicite héritent de la limite globale de requêtes simultanées ; une valeur explicite de 0 signifie illimité.",
+    "模型请求速率与并发限制": "Limites de débit et de requêtes simultanées des modèles",
+    "每个最大并发数必须是 0 到 2147483647 之间的整数。": "Chaque valeur maximale de requêtes simultanées doit être un entier compris entre 0 et 2147483647.",
+    "用户最大并发请求数": "Nombre maximal de requêtes simultanées par utilisateur"
   }
 }

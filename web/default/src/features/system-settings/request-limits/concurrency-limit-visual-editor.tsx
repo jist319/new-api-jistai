@@ -17,7 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { Plus, Search } from 'lucide-react'
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { StaticDataTable } from '@/components/data-table/static/static-data-table'
@@ -25,92 +25,61 @@ import { StaticRowActions } from '@/components/data-table/static/static-row-acti
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-import { safeJsonParseWithValidation } from '../utils/json-parser'
-import { isObjectRecord } from '../utils/json-validators'
-import { RateLimitDialog, type RateLimitEntryData } from './rate-limit-dialog'
+import { parseConcurrencyLimitMap } from './concurrency-limit'
+import {
+  ConcurrencyLimitDialog,
+  type ConcurrencyLimitEntryData,
+} from './concurrency-limit-dialog'
 
-type RateLimitVisualEditorProps = {
+type ConcurrencyLimitVisualEditorProps = {
   value: string
   onChange: (value: string) => void
 }
 
-type RateLimitEntry = RateLimitEntryData
-
-export function RateLimitVisualEditor({
-  value,
-  onChange,
-}: RateLimitVisualEditorProps) {
+export function ConcurrencyLimitVisualEditor(
+  props: ConcurrencyLimitVisualEditorProps
+) {
   const { t } = useTranslation()
   const [searchText, setSearchText] = useState('')
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [editData, setEditData] = useState<RateLimitEntry | null>(null)
+  const [editData, setEditData] = useState<ConcurrencyLimitEntryData | null>(
+    null
+  )
 
-  const rateLimits = useMemo(() => {
-    if (!value || value.trim() === '') return []
+  const concurrencyLimits = useMemo(
+    () =>
+      Object.entries(parseConcurrencyLimitMap(props.value)).map(
+        ([groupName, maxConcurrency]) => ({ groupName, maxConcurrency })
+      ),
+    [props.value]
+  )
 
-    const parsed = safeJsonParseWithValidation<Record<string, unknown>>(value, {
-      fallback: {},
-      validator: isObjectRecord,
-      validatorMessage: 'Rate limits must be a JSON object',
-      context: 'rate limits',
-    })
-
-    return Object.entries(parsed)
-      .map(([groupName, limits]) => {
-        if (
-          Array.isArray(limits) &&
-          limits.length === 2 &&
-          typeof limits[0] === 'number' &&
-          typeof limits[1] === 'number'
-        ) {
-          return {
-            groupName,
-            maxRequests: limits[0],
-            maxSuccess: limits[1],
-          }
-        }
-        return null
-      })
-      .filter((item): item is RateLimitEntry => item !== null)
-  }, [value])
-
-  const filteredRateLimits = useMemo(() => {
-    if (!searchText) return rateLimits
+  const filteredConcurrencyLimits = useMemo(() => {
+    if (!searchText) return concurrencyLimits
     const lowerSearch = searchText.toLowerCase()
-    return rateLimits.filter((limit) =>
+    return concurrencyLimits.filter((limit) =>
       limit.groupName.toLowerCase().includes(lowerSearch)
     )
-  }, [rateLimits, searchText])
+  }, [concurrencyLimits, searchText])
 
-  const handleSave = (data: RateLimitEntryData) => {
-    const parsed = safeJsonParseWithValidation<Record<string, unknown>>(value, {
-      fallback: {},
-      validator: isObjectRecord,
-      silent: true,
-    })
+  const handleSave = (data: ConcurrencyLimitEntryData) => {
+    const parsed = parseConcurrencyLimitMap(props.value)
 
     if (editData && editData.groupName !== data.groupName) {
       delete parsed[editData.groupName]
     }
 
-    parsed[data.groupName] = [data.maxRequests, data.maxSuccess]
-
-    onChange(JSON.stringify(parsed, null, 2))
+    parsed[data.groupName] = data.maxConcurrency
+    props.onChange(JSON.stringify(parsed, null, 2))
   }
 
   const handleDelete = (groupName: string) => {
-    const parsed = safeJsonParseWithValidation<Record<string, unknown>>(value, {
-      fallback: {},
-      validator: isObjectRecord,
-      silent: true,
-    })
-
+    const parsed = parseConcurrencyLimitMap(props.value)
     delete parsed[groupName]
-
-    onChange(JSON.stringify(parsed, null, 2))
+    props.onChange(JSON.stringify(parsed, null, 2))
   }
 
-  const handleEdit = (limit: RateLimitEntry) => {
+  const handleEdit = (limit: ConcurrencyLimitEntryData) => {
     setEditData(limit)
     setDialogOpen(true)
   }
@@ -128,7 +97,7 @@ export function RateLimitVisualEditor({
           <Input
             placeholder={t('Search group names...')}
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(event) => setSearchText(event.target.value)}
             className='pl-9'
           />
         </div>
@@ -139,13 +108,13 @@ export function RateLimitVisualEditor({
       </div>
 
       <StaticDataTable
-        data={filteredRateLimits}
+        data={filteredConcurrencyLimits}
         getRowKey={(limit) => limit.groupName}
         emptyContent={
           searchText
             ? t('No groups match your search')
             : t(
-                'No group-based rate limits configured. Click "Add group" to get started.'
+                'No group concurrency limits configured. Unlisted groups inherit the global limit.'
               )
         }
         columns={[
@@ -156,26 +125,15 @@ export function RateLimitVisualEditor({
             cell: (limit) => limit.groupName,
           },
           {
-            id: 'max-requests',
-            header: t('Max Requests (incl. failures)'),
+            id: 'max-concurrency',
+            header: t('Maximum Concurrency'),
             className: 'text-right',
             cellClassName: 'text-right',
             cell: (limit) => (
               <span className='font-mono'>
-                {limit.maxRequests === 0
+                {limit.maxConcurrency === 0
                   ? t('Unlimited')
-                  : limit.maxRequests.toLocaleString()}
-              </span>
-            ),
-          },
-          {
-            id: 'max-success',
-            header: t('Max Success'),
-            className: 'text-right',
-            cellClassName: 'text-right',
-            cell: (limit) => (
-              <span className='font-mono'>
-                {limit.maxSuccess.toLocaleString()}
+                  : limit.maxConcurrency.toLocaleString()}
               </span>
             ),
           },
@@ -197,7 +155,7 @@ export function RateLimitVisualEditor({
         ]}
       />
 
-      <RateLimitDialog
+      <ConcurrencyLimitDialog
         open={dialogOpen}
         onOpenChange={setDialogOpen}
         onSave={handleSave}

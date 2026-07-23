@@ -29,6 +29,39 @@ import {
 } from '../../../helpers';
 import { useTranslation } from 'react-i18next';
 
+const MAX_CONCURRENCY_LIMIT = 2147483647;
+
+function isValidConcurrencyLimit(value) {
+  if (typeof value === 'string' && value.trim() === '') return false;
+  const limit = Number(value);
+  return (
+    Number.isInteger(limit) && limit >= 0 && limit <= MAX_CONCURRENCY_LIMIT
+  );
+}
+
+function isValidConcurrencyLimitGroup(value) {
+  if (typeof value !== 'string' || value.trim() === '') return false;
+
+  try {
+    const parsed = JSON.parse(value);
+    if (
+      typeof parsed !== 'object' ||
+      parsed === null ||
+      Array.isArray(parsed)
+    ) {
+      return false;
+    }
+    return Object.entries(parsed).every(
+      ([groupName, limit]) =>
+        groupName.trim().length > 0 &&
+        typeof limit === 'number' &&
+        isValidConcurrencyLimit(limit),
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default function RequestRateLimit(props) {
   const { t } = useTranslation();
 
@@ -39,11 +72,20 @@ export default function RequestRateLimit(props) {
     ModelRequestRateLimitSuccessCount: 1000,
     ModelRequestRateLimitDurationMinutes: 1,
     ModelRequestRateLimitGroup: '',
+    ModelRequestConcurrencyLimit: 0,
+    ModelRequestConcurrencyLimitGroup: '{}',
   });
   const refForm = useRef();
   const [inputsRow, setInputsRow] = useState(inputs);
 
-  function onSubmit() {
+  async function onSubmit() {
+    try {
+      await refForm.current.validate();
+    } catch {
+      showError(t('请检查输入'));
+      return;
+    }
+
     const updateArray = compareObjects(inputs, inputsRow);
     if (!updateArray.length) return showWarning(t('你似乎并没有修改什么'));
     const requestQueue = updateArray.map((item) => {
@@ -105,7 +147,7 @@ export default function RequestRateLimit(props) {
           getFormApi={(formAPI) => (refForm.current = formAPI)}
           style={{ marginBottom: 15 }}
         >
-          <Form.Section text={t('模型请求速率限制')}>
+          <Form.Section text={t('模型请求速率与并发限制')}>
             <Row gutter={16}>
               <Col xs={24} sm={12} md={8} lg={8} xl={8}>
                 <Form.Switch
@@ -178,6 +220,34 @@ export default function RequestRateLimit(props) {
               </Col>
             </Row>
             <Row>
+              <Col xs={24} sm={12} md={8} lg={8} xl={8}>
+                <Form.InputNumber
+                  label={t('用户最大并发请求数')}
+                  step={1}
+                  min={0}
+                  max={MAX_CONCURRENCY_LIMIT}
+                  extraText={t(
+                    '同一用户所有 API 密钥正在处理的模型请求总数，0 代表不限制；此设置独立于速率限制。',
+                  )}
+                  field={'ModelRequestConcurrencyLimit'}
+                  stopValidateWithError
+                  rules={[
+                    {
+                      validator: (rule, value) =>
+                        isValidConcurrencyLimit(value),
+                      message: t('并发限制必须是 0 到 2147483647 之间的整数'),
+                    },
+                  ]}
+                  onChange={(value) =>
+                    setInputs({
+                      ...inputs,
+                      ModelRequestConcurrencyLimit: String(value),
+                    })
+                  }
+                />
+              </Col>
+            </Row>
+            <Row>
               <Col xs={24} sm={16}>
                 <Form.TextArea
                   label={t('分组速率限制')}
@@ -230,8 +300,57 @@ export default function RequestRateLimit(props) {
               </Col>
             </Row>
             <Row>
+              <Col xs={24} sm={16}>
+                <Form.TextArea
+                  label={t('分组并发限制')}
+                  placeholder={t('{\n  "default": 5,\n  "vip": 20\n}')}
+                  field={'ModelRequestConcurrencyLimitGroup'}
+                  autosize={{ minRows: 5, maxRows: 15 }}
+                  trigger='blur'
+                  stopValidateWithError
+                  rules={[
+                    {
+                      validator: (rule, value) =>
+                        isValidConcurrencyLimitGroup(value),
+                      message: t(
+                        '分组并发限制必须是 JSON 对象，分组名称不能为空，且每个值必须是 0 到 2147483647 之间的整数',
+                      ),
+                    },
+                  ]}
+                  extraText={
+                    <div>
+                      <p>{t('说明：')}</p>
+                      <ul>
+                        <li>
+                          {t(
+                            '使用 JSON 对象格式，格式为：{"组名": 最大并发数}',
+                          )}
+                        </li>
+                        <li>
+                          {t(
+                            '未配置的分组继承全局并发限制，显式配置 0 代表不限制。',
+                          )}
+                        </li>
+                        <li>
+                          {t(
+                            '每个最大并发数必须是 0 到 2147483647 之间的整数。',
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                  }
+                  onChange={(value) => {
+                    setInputs({
+                      ...inputs,
+                      ModelRequestConcurrencyLimitGroup: value,
+                    });
+                  }}
+                />
+              </Col>
+            </Row>
+            <Row>
               <Button size='default' onClick={onSubmit}>
-                {t('保存模型速率限制')}
+                {t('保存模型请求限制')}
               </Button>
             </Row>
           </Form.Section>

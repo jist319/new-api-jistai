@@ -45,6 +45,11 @@ import {
 import { SettingsPageFormActions } from '../components/settings-page-context'
 import { SettingsSection } from '../components/settings-section'
 import { useUpdateOption } from '../hooks/use-update-option'
+import {
+  MAX_CONCURRENCY_LIMIT,
+  isValidConcurrencyLimitJson,
+} from './concurrency-limit'
+import { ConcurrencyLimitVisualEditor } from './concurrency-limit-visual-editor'
 import { RateLimitVisualEditor } from './rate-limit-visual-editor'
 
 const isValidJSON = (value: string | undefined) => {
@@ -77,6 +82,18 @@ const createRateLimitSchema = (t: (key: string) => string) =>
       .optional()
       .refine(isValidJSON, {
         message: t('Invalid JSON format or values out of allowed range'),
+      }),
+    ModelRequestConcurrencyLimit: z
+      .number()
+      .int(t('Must be an integer'))
+      .min(0, t('Must be ≥ 0'))
+      .max(MAX_CONCURRENCY_LIMIT, t('Must be ≤ 2,147,483,647')),
+    ModelRequestConcurrencyLimitGroup: z
+      .string()
+      .refine(isValidConcurrencyLimitJson, {
+        message: t(
+          'Must be a JSON object with non-empty group names and integer values from 0 to 2,147,483,647'
+        ),
       }),
   })
 
@@ -121,7 +138,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
           <SettingsPageFormActions
             onSave={form.handleSubmit(onSubmit)}
             isSaving={updateOption.isPending}
-            saveLabel='Save rate limits'
+            saveLabel='Save request limits'
           />
           <FormField
             control={form.control}
@@ -161,7 +178,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                         step={1}
                         {...field}
                         onChange={(e) =>
-                          field.onChange(parseInt(e.target.value) || 0)
+                          field.onChange(Number.parseInt(e.target.value) || 0)
                         }
                       />
                       <span className='text-muted-foreground text-sm'>
@@ -192,7 +209,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                         step={1}
                         {...field}
                         onChange={(e) =>
-                          field.onChange(parseInt(e.target.value) || 0)
+                          field.onChange(Number.parseInt(e.target.value) || 0)
                         }
                       />
                       <span className='text-muted-foreground text-sm'>
@@ -223,7 +240,7 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                         step={1}
                         {...field}
                         onChange={(e) =>
-                          field.onChange(parseInt(e.target.value) || 1)
+                          field.onChange(Number.parseInt(e.target.value) || 1)
                         }
                       />
                       <span className='text-muted-foreground text-sm'>
@@ -242,30 +259,70 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
 
           <FormField
             control={form.control}
+            name='ModelRequestConcurrencyLimit'
+            render={({ field }) => (
+              <FormItem className='max-w-md'>
+                <FormLabel>{t('Concurrent request limit per user')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type='number'
+                    min={0}
+                    max={MAX_CONCURRENCY_LIMIT}
+                    step={1}
+                    {...field}
+                    onChange={(event) =>
+                      field.onChange(Number(event.target.value))
+                    }
+                  />
+                </FormControl>
+                <FormDescription>
+                  {t(
+                    'Maximum in-flight model requests across all API keys for one user. 0 = unlimited. This applies independently of rate limiting.'
+                  )}
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+            <div className='space-y-1'>
+              <h3 className='text-sm font-medium'>
+                {t('Group-based request limits')}
+              </h3>
+              <p className='text-muted-foreground text-sm'>
+                {t(
+                  'Rate and concurrency limits use separate group configuration objects.'
+                )}
+              </p>
+            </div>
+            <Button
+              type='button'
+              variant='outline'
+              size='sm'
+              className='self-start sm:self-auto'
+              onClick={() => setUseVisualEditor(!useVisualEditor)}
+            >
+              {useVisualEditor ? (
+                <>
+                  <Code2 className='mr-2 h-4 w-4' />
+                  {t('JSON Mode')}
+                </>
+              ) : (
+                <>
+                  <Palette className='mr-2 h-4 w-4' />
+                  {t('Visual Mode')}
+                </>
+              )}
+            </Button>
+          </div>
+
+          <FormField
+            control={form.control}
             name='ModelRequestRateLimitGroup'
             render={({ field }) => (
               <FormItem>
-                <div className='flex items-center justify-between'>
-                  <FormLabel>{t('Group-based rate limits')}</FormLabel>
-                  <Button
-                    type='button'
-                    variant='outline'
-                    size='sm'
-                    onClick={() => setUseVisualEditor(!useVisualEditor)}
-                  >
-                    {useVisualEditor ? (
-                      <>
-                        <Code2 className='mr-2 h-4 w-4' />
-                        {t('JSON Mode')}
-                      </>
-                    ) : (
-                      <>
-                        <Palette className='mr-2 h-4 w-4' />
-                        {t('Visual Mode')}
-                      </>
-                    )}
-                  </Button>
-                </div>
+                <FormLabel>{t('Group-based rate limits')}</FormLabel>
                 <FormControl>
                   {useVisualEditor ? (
                     <RateLimitVisualEditor
@@ -302,6 +359,66 @@ export function RateLimitSection({ defaultValues }: RateLimitSectionProps) {
                         <li>
                           {t(
                             'Group config overrides global limits, shares the same period'
+                          )}
+                        </li>
+                      </ul>
+                    </div>
+                  </FormDescription>
+                )}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name='ModelRequestConcurrencyLimitGroup'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('Group-based concurrency limits')}</FormLabel>
+                <FormControl>
+                  {useVisualEditor ? (
+                    <ConcurrencyLimitVisualEditor
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  ) : (
+                    <Textarea
+                      rows={8}
+                      placeholder={`{
+  "default": 5,
+  "vip": 20
+}`}
+                      className='font-mono text-sm'
+                      {...field}
+                    />
+                  )}
+                </FormControl>
+                {useVisualEditor ? (
+                  <FormDescription>
+                    {t(
+                      'Unlisted groups inherit the global concurrency limit; an explicit 0 means unlimited.'
+                    )}
+                  </FormDescription>
+                ) : (
+                  <FormDescription>
+                    <div className='space-y-1 text-xs'>
+                      <p className='font-semibold'>{t('Format:')}</p>
+                      <ul className='list-inside list-disc space-y-0.5 pl-2'>
+                        <li>
+                          {t('JSON object:')} {`{"groupName": maxConcurrency}`}
+                        </li>
+                        <li>
+                          {t('Example:')} {`{"default": 5, "vip": 20}`}
+                        </li>
+                        <li>
+                          {t(
+                            'Each value must be an integer from 0 to 2,147,483,647'
+                          )}
+                        </li>
+                        <li>
+                          {t(
+                            'Unlisted groups inherit the global limit; an explicit 0 means unlimited'
                           )}
                         </li>
                       </ul>

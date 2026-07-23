@@ -139,6 +139,8 @@ func InitOptionMap() {
 	common.OptionMap["ModelRequestRateLimitDurationMinutes"] = strconv.Itoa(setting.ModelRequestRateLimitDurationMinutes)
 	common.OptionMap["ModelRequestRateLimitSuccessCount"] = strconv.Itoa(setting.ModelRequestRateLimitSuccessCount)
 	common.OptionMap["ModelRequestRateLimitGroup"] = setting.ModelRequestRateLimitGroup2JSONString()
+	common.OptionMap["ModelRequestConcurrencyLimit"] = strconv.Itoa(setting.GetModelRequestConcurrencyLimit(""))
+	common.OptionMap["ModelRequestConcurrencyLimitGroup"] = setting.ModelRequestConcurrencyLimitGroup2JSONString()
 	common.OptionMap["ModelRatio"] = ratio_setting.ModelRatio2JSONString()
 	common.OptionMap["ModelPrice"] = ratio_setting.ModelPrice2JSONString()
 	common.OptionMap["CacheRatio"] = ratio_setting.CacheRatio2JSONString()
@@ -205,17 +207,24 @@ func SyncOptions(frequency int) {
 }
 
 func UpdateOption(key string, value string) error {
+	if err := validateOptionValue(key, value); err != nil {
+		return err
+	}
 	// Save to database first
 	option := Option{
 		Key: key,
 	}
 	// https://gorm.io/docs/update.html#Save-All-Fields
-	DB.FirstOrCreate(&option, Option{Key: key})
+	if err := DB.FirstOrCreate(&option, Option{Key: key}).Error; err != nil {
+		return err
+	}
 	option.Value = value
 	// Save is a combination function.
 	// If save value does not contain primary key, it will execute Create,
 	// otherwise it will execute Update (with all fields).
-	DB.Save(&option)
+	if err := DB.Save(&option).Error; err != nil {
+		return err
+	}
 	// Update OptionMap
 	return updateOptionMap(key, value)
 }
@@ -228,6 +237,11 @@ func UpdateOption(key string, value string) error {
 func UpdateOptionsBulk(values map[string]string) error {
 	if len(values) == 0 {
 		return nil
+	}
+	for key, value := range values {
+		if err := validateOptionValue(key, value); err != nil {
+			return err
+		}
 	}
 	err := DB.Transaction(func(tx *gorm.DB) error {
 		for k, v := range values {
@@ -254,6 +268,10 @@ func UpdateOptionsBulk(values map[string]string) error {
 }
 
 func updateOptionMap(key string, value string) (err error) {
+	if err := validateOptionValue(key, value); err != nil {
+		return err
+	}
+
 	common.OptionMapRWMutex.Lock()
 	defer common.OptionMapRWMutex.Unlock()
 	common.OptionMap[key] = value
@@ -518,6 +536,10 @@ func updateOptionMap(key string, value string) (err error) {
 		setting.ModelRequestRateLimitSuccessCount, _ = strconv.Atoi(value)
 	case "ModelRequestRateLimitGroup":
 		err = setting.UpdateModelRequestRateLimitGroupByJSONString(value)
+	case "ModelRequestConcurrencyLimit":
+		err = setting.UpdateModelRequestConcurrencyLimit(value)
+	case "ModelRequestConcurrencyLimitGroup":
+		err = setting.UpdateModelRequestConcurrencyLimitGroupByJSONString(value)
 	case "RetryTimes":
 		common.RetryTimes, _ = strconv.Atoi(value)
 	case "DataExportInterval":
@@ -574,6 +596,20 @@ func updateOptionMap(key string, value string) (err error) {
 		// No additional in-memory variable to update.
 	}
 	return err
+}
+
+func validateOptionValue(key, value string) error {
+	switch key {
+	case "ModelRequestRateLimitGroup":
+		return setting.CheckModelRequestRateLimitGroup(value)
+	case "ModelRequestConcurrencyLimit":
+		_, err := setting.ParseModelRequestConcurrencyLimit(value)
+		return err
+	case "ModelRequestConcurrencyLimitGroup":
+		return setting.CheckModelRequestConcurrencyLimitGroup(value)
+	default:
+		return nil
+	}
 }
 
 // handleConfigUpdate 处理分层配置更新，返回是否已处理
