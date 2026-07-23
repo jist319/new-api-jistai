@@ -16,6 +16,10 @@ The exact deployed JistAI source revision is:
 
 `f4b3af1fab385de980f48cd198924df122774c35`
 
+The public source repository for this corresponding version is:
+
+https://github.com/liuyingcai/new-api-jistai
+
 This revision is not an official release of the upstream project. JistAI does
 not represent this modified version as an official QuantumNous or New API
 distribution.
@@ -35,4 +39,3 @@ the terms required by AGPLv3. This repository contains source and build inputs
 for the corresponding deployed version. It intentionally does not contain
 runtime credentials, database contents, user data, Cloudflare configuration,
 TLS private keys, or other private operational data.
-
