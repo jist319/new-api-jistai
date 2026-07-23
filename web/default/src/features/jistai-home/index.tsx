@@ -36,7 +36,10 @@ export function JistAIHome(props: JistAIHomeProps) {
   const config = useMemo(() => resolveJistAIPublicConfig(status), [status])
 
   return (
-    <main id='main-content'>
+    <main
+      id='main-content'
+      className='bg-[#f7faf9] pt-16 dark:bg-[#091011]'
+    >
       <JistAIHero config={config} isAuthenticated={props.isAuthenticated} />
       <ApiEndpoint apiBaseUrl={config.apiBaseUrl} />
       <Capabilities />

@@ -35,7 +35,7 @@ export function BrandMark(props: BrandMarkProps) {
       height={72}
       decoding='async'
       fetchPriority='high'
-      className='size-16 rounded-[8px] object-contain sm:size-[72px]'
+      className='size-10 rounded-[6px] object-contain'
       onError={(event) => {
         if (event.currentTarget.src !== JISTAI_LOGO_FALLBACK) {
           event.currentTarget.src = JISTAI_LOGO_FALLBACK

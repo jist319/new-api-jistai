@@ -17,7 +17,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 For commercial licensing, please contact support@quantumnous.com
 */
 import { Link } from '@tanstack/react-router'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShieldCheck } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { Button } from '@/components/ui/button'
@@ -35,23 +35,26 @@ export function FinalCta(props: FinalCtaProps) {
   return (
     <section
       aria-labelledby='jistai-final-cta-title'
-      className='border-border/70 border-y bg-emerald-950 px-4 py-12 text-white sm:px-6 sm:py-14 dark:bg-emerald-950/70'
+      className='border-b border-[#1d2a2b] bg-[#091011] px-4 py-12 text-white sm:px-6 sm:py-16'
     >
-      <div className='mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 sm:flex-row sm:items-center'>
+      <div className='mx-auto flex max-w-7xl flex-col gap-8 sm:flex-row sm:items-center sm:justify-between'>
         <div className='max-w-2xl'>
+          <div className='mb-4 inline-flex items-center gap-2 font-mono text-[10px] font-semibold tracking-[0.2em] text-cyan-200/75 uppercase'>
+            <ShieldCheck aria-hidden='true' className='size-3.5' />
+            {t('Get started')}
+          </div>
           <h2
             id='jistai-final-cta-title'
             className='text-2xl leading-tight font-semibold tracking-normal sm:text-3xl'
           >
             {t('Put one API behind your next AI workflow')}
           </h2>
-          <p className='mt-3 text-sm leading-6 tracking-normal text-emerald-50/75 sm:text-base'>
+          <p className='mt-3 max-w-xl text-sm leading-6 text-white/55 sm:text-base'>
             {t('Create your workspace, issue a key, and connect your client.')}
           </p>
         </div>
         <Button
-          variant='secondary'
-          className='h-11 w-full rounded-[8px] bg-white px-5 text-emerald-950 hover:bg-emerald-50 sm:w-auto'
+          className='h-11 w-full rounded-[8px] bg-cyan-300 px-5 text-sm font-semibold text-[#071113] hover:bg-cyan-200 sm:w-auto'
           render={<Link to={target} />}
         >
           {props.isAuthenticated ? t('Open dashboard') : t('Get started')}

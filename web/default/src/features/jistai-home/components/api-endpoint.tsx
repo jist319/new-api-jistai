@@ -16,7 +16,7 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 For commercial licensing, please contact support@quantumnous.com
 */
-import { Check, Copy, Terminal } from 'lucide-react'
+import { Check, Copy, ExternalLink, Terminal } from 'lucide-react'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -59,12 +59,12 @@ export function ApiEndpoint(props: ApiEndpointProps) {
       type='button'
       variant='ghost'
       size='icon'
-      className='size-9 rounded-[8px] text-white/70 hover:bg-white/10 hover:text-white'
+      className='size-9 rounded-[6px] text-white/65 hover:bg-white/10 hover:text-white'
       onClick={handleCopy}
       aria-label={copied ? t('API base URL copied') : t('Copy API base URL')}
     >
       {copied ? (
-        <Check className='size-4 text-emerald-300' />
+        <Check className='size-4 text-lime-200' />
       ) : (
         <Copy className='size-4' />
       )}
@@ -73,42 +73,85 @@ export function ApiEndpoint(props: ApiEndpointProps) {
 
   return (
     <section
+      id='jistai-api-base-url'
       aria-labelledby='jistai-api-base-url-title'
-      className='border-y border-white/10 bg-[#101412] px-4 py-7 text-white sm:px-6 sm:py-8'
+      className='border-b border-[#d7e2df] bg-[#edf3f1] px-4 py-10 sm:px-6 sm:py-14'
     >
-      <div className='mx-auto max-w-6xl'>
-        <div className='flex min-h-10 items-center justify-between gap-3'>
-          <div className='flex min-w-0 items-center gap-2 text-sm font-medium tracking-normal'>
-            <Terminal aria-hidden='true' className='size-4 text-cyan-300' />
-            <h2 id='jistai-api-base-url-title'>{t('API base URL')}</h2>
+      <div className='mx-auto max-w-7xl'>
+        <div className='flex flex-col gap-4 border-b border-[#ccd9d5] pb-6 sm:flex-row sm:items-end sm:justify-between'>
+          <div>
+            <p className='font-mono text-[10px] font-semibold tracking-[0.2em] text-[#177f83] uppercase'>
+              {t('API base URL')} / 01
+            </p>
+            <h2
+              id='jistai-api-base-url-title'
+              className='mt-2 text-2xl font-semibold tracking-normal text-[#0b1718] sm:text-3xl'
+            >
+              {t('API base URL')}
+            </h2>
           </div>
-          <Tooltip>
-            <TooltipTrigger render={copyButton} />
-            <TooltipContent>
-              <p>
-                {copied ? t('API base URL copied') : t('Copy API base URL')}
-              </p>
-            </TooltipContent>
-          </Tooltip>
+          <div className='inline-flex w-fit items-center gap-2 rounded-[6px] border border-[#b7d8c3] bg-[#e5f5e9] px-3 py-2 font-mono text-[10px] font-semibold tracking-[0.14em] text-[#247044] uppercase'>
+            <span className='size-1.5 rounded-full bg-[#39a85a]' />
+            {t('Environment configuration example')}
+          </div>
         </div>
 
-        <div className='mt-3 border-y border-white/10 py-4'>
-          <code className='block min-w-0 font-mono text-base leading-7 break-all text-emerald-200 sm:text-lg'>
-            {props.apiBaseUrl}
-          </code>
+        <div className='mt-6 grid gap-4 lg:grid-cols-[minmax(0,1fr)_240px]'>
+          <div className='min-w-0 overflow-hidden rounded-[8px] border border-[#263638] bg-[#0b1314] text-white shadow-[0_18px_40px_-28px_rgba(7,17,18,0.8)]'>
+            <div className='flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 sm:px-5'>
+              <div className='flex min-w-0 items-center gap-2 font-mono text-xs font-medium text-white/80'>
+                <Terminal aria-hidden='true' className='size-4 shrink-0 text-cyan-200' />
+                <span className='truncate'>OPENAI_BASE_URL</span>
+              </div>
+              <Tooltip>
+                <TooltipTrigger render={copyButton} />
+                <TooltipContent>
+                  <p>
+                    {copied ? t('API base URL copied') : t('Copy API base URL')}
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+
+            <div className='px-4 py-5 sm:px-5 sm:py-6'>
+              <code className='block min-w-0 font-mono text-base leading-7 break-all text-cyan-200 sm:text-xl sm:leading-8'>
+                {props.apiBaseUrl}
+              </code>
+              <p
+                aria-live='polite'
+                className='mt-3 min-h-5 text-xs leading-5 text-white/60'
+              >
+                {feedback}
+              </p>
+            </div>
+
+            <div className='grid gap-2 border-t border-white/10 px-4 py-4 font-mono text-[11px] leading-5 sm:grid-cols-[auto_1fr] sm:px-5'>
+              <span className='text-amber-200'>OPENAI_API_KEY</span>
+              <span className='min-w-0 break-all text-white/55'>&lt;your-api-key&gt;</span>
+              <span className='text-lime-200'>SDK MODE</span>
+              <span className='text-white/55'>OpenAI-compatible / streaming</span>
+            </div>
+          </div>
+
+          <div className='flex flex-col justify-between rounded-[8px] border border-[#cddbd7] bg-white/70 p-4 sm:p-5'>
+            <div>
+              <div className='flex size-9 items-center justify-center rounded-[6px] bg-[#dff1ee] text-[#177f83]'>
+                <ExternalLink aria-hidden='true' className='size-4' />
+              </div>
+              <p className='mt-5 font-mono text-[10px] font-semibold tracking-[0.16em] text-[#4d625d] uppercase'>
+                {t('OpenAI-compatible endpoint')}
+              </p>
+              <p className='mt-2 text-sm leading-6 text-[#314542]'>
+                {t('Use this URL in your OpenAI-compatible client')}
+              </p>
+            </div>
+            <div className='mt-7 border-t border-[#d7e2df] pt-4 font-mono text-[10px] leading-5 text-[#4d625d]'>
+              <span className='text-[#177f83]'>BASE</span>
+              <br />
+              /v1
+            </div>
+          </div>
         </div>
-        <div className='mt-4 grid gap-2 border-t border-white/10 pt-4 font-mono text-xs leading-5 text-white/55 sm:grid-cols-[auto_1fr]'>
-          <span className='text-amber-200'>OPENAI_BASE_URL</span>
-          <span className='min-w-0 break-all'>{props.apiBaseUrl}</span>
-          <span className='text-cyan-200'>OPENAI_API_KEY</span>
-          <span>&lt;your-api-key&gt;</span>
-        </div>
-        <p
-          aria-live='polite'
-          className='mt-3 min-h-5 text-xs leading-5 text-white/55'
-        >
-          {feedback}
-        </p>
       </div>
     </section>
   )
