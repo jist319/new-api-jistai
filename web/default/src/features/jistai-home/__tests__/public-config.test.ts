@@ -73,6 +73,7 @@ describe('JistAI public homepage configuration', () => {
     }
     const config = resolveJistAIPublicConfig(status)
 
+    assert.equal(JISTAI_LOGO_FALLBACK, '/logo.png')
     assert.equal(config.logoUrl, JISTAI_LOGO_FALLBACK)
     assert.equal(config.apiBaseUrl, 'https://api.jistai.net/v1')
     assert.equal(config.docsUrl, 'https://docs.newapi.pro')

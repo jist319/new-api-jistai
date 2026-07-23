@@ -23,10 +23,10 @@ import { PublicLayout } from '@/components/layout'
 import { Footer } from '@/components/layout/components/footer'
 import { RichContent } from '@/components/rich-content'
 import { useTheme } from '@/context/theme-provider'
-import { JistAIHome } from '@/features/jistai-home'
 import { isLikelyHtml } from '@/lib/content-format'
 import { useAuthStore } from '@/stores/auth-store'
 
+import { CTA, Features, Hero, HowItWorks, Stats } from './components'
 import { useHomePageContent } from './hooks'
 
 export function Home() {
@@ -122,7 +122,17 @@ export function Home() {
 
   return (
     <PublicLayout showMainContainer={false}>
-      <JistAIHome isAuthenticated={isAuthenticated} />
+      <main
+        id='main-content'
+        className='home-page bg-background relative isolate overflow-hidden'
+      >
+        <div aria-hidden className='home-page-grid pointer-events-none' />
+        <Hero isAuthenticated={isAuthenticated} />
+        <Stats />
+        <Features />
+        <HowItWorks />
+        <CTA isAuthenticated={isAuthenticated} />
+      </main>
       <Footer />
     </PublicLayout>
   )

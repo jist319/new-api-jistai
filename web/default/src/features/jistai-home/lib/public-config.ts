@@ -18,8 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import type { SystemStatus } from '@/features/auth/types'
 
-export const JISTAI_LOGO_FALLBACK =
-  'https://jistai.net/branding/jistai-logo-v1.png'
+export const JISTAI_LOGO_FALLBACK = '/logo.png'
 
 const API_BASE_FALLBACK = 'https://api.jistai.net'
 const DOCS_FALLBACK = 'https://docs.newapi.pro'

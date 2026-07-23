@@ -136,7 +136,16 @@ function ProjectAttribution(props: { currentYear: number; inline?: boolean }) {
       >
         {t('New API')}
       </a>
-      . {t(NEW_API_FOOTER_ATTRIBUTION_KEY)}
+      . {t(NEW_API_FOOTER_ATTRIBUTION_KEY)} <span aria-hidden='true'>·</span>{' '}
+      <a
+        href='https://github.com/liuyingcai/new-api-jistai'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='text-foreground/70 hover:text-foreground font-medium transition-colors'
+        aria-label='JistAI 公开仓库'
+      >
+        JistAI 公开仓库
+      </a>
     </span>
   )
   if (props.inline) {
@@ -272,14 +281,16 @@ export function Footer(props: FooterProps) {
           {/* Links columns */}
           {isDemoSiteMode && (
             <div className='grid grid-cols-3 gap-8 md:gap-16'>
-              {displayColumns.map((column, index) => (
-                <div key={index}>
+              {displayColumns.map((column) => (
+                <div
+                  key={`${column.title}:${column.links.map((link) => link.href).join('|')}`}
+                >
                   <p className='text-muted-foreground/50 mb-3 text-xs font-medium tracking-wider uppercase'>
                     {t(column.title)}
                   </p>
                   <ul className='space-y-2.5'>
-                    {column.links.map((link, linkIndex) => (
-                      <li key={linkIndex}>
+                    {column.links.map((link) => (
+                      <li key={`${link.href}:${link.text}`}>
                         <FooterLinkItem link={link} />
                       </li>
                     ))}

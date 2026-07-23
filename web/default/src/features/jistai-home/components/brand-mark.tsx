@@ -37,8 +37,9 @@ export function BrandMark(props: BrandMarkProps) {
       fetchPriority='high'
       className='size-10 rounded-[6px] object-contain'
       onError={(event) => {
-        if (event.currentTarget.src !== JISTAI_LOGO_FALLBACK) {
-          event.currentTarget.src = JISTAI_LOGO_FALLBACK
+        const image = event.currentTarget
+        if (image.getAttribute('src') !== JISTAI_LOGO_FALLBACK) {
+          image.src = JISTAI_LOGO_FALLBACK
         }
       }}
     />

@@ -36,7 +36,7 @@ export function CTA(props: CTAProps) {
   }
 
   return (
-    <section className='relative z-10 overflow-hidden px-6 py-24 md:py-32'>
+    <section className='home-section home-cta relative z-10 overflow-hidden px-6 py-24 md:py-32'>
       {/* Gradient mesh background */}
       <div
         aria-hidden
@@ -50,7 +50,7 @@ export function CTA(props: CTAProps) {
       />
 
       <AnimateInView
-        className='mx-auto max-w-2xl text-center'
+        className='home-cta-panel mx-auto max-w-2xl text-center'
         animation='scale-in'
       >
         <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-4xl'>

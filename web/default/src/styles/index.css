@@ -605,6 +605,110 @@ For commercial licensing, please contact support@quantumnous.com
   animation: terminal-demo-pulse 1.5s ease-in-out infinite;
 }
 
+/* ── Default homepage surface ── */
+.home-page {
+  --home-line: color-mix(in oklch, var(--foreground) 7%, transparent);
+  --home-glow: color-mix(in oklch, var(--primary) 13%, transparent);
+  background-image: radial-gradient(
+    ellipse 65% 42% at 50% -8%,
+    var(--home-glow),
+    transparent 72%
+  );
+}
+
+.home-page-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, var(--home-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--home-line) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+  opacity: 0.5;
+}
+
+.home-page-container {
+  position: relative;
+}
+
+.home-hero {
+  min-height: min(760px, calc(100svh - 4rem));
+  display: flex;
+  align-items: center;
+}
+
+.home-hero > .home-page-container {
+  width: 100%;
+}
+
+.home-terminal {
+  filter: drop-shadow(
+    0 24px 42px color-mix(in oklch, var(--foreground) 10%, transparent)
+  );
+  transition:
+    filter 220ms ease,
+    transform 220ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-terminal:hover {
+    filter: drop-shadow(
+      0 30px 52px color-mix(in oklch, var(--foreground) 16%, transparent)
+    );
+    transform: translateY(-3px);
+  }
+}
+
+.home-stats {
+  background-color: color-mix(in oklch, var(--background) 78%, var(--primary));
+  backdrop-filter: blur(12px);
+}
+
+.home-bento {
+  box-shadow: 0 22px 70px -48px
+    color-mix(in oklch, var(--foreground) 32%, transparent);
+}
+
+.home-bento-item {
+  position: relative;
+}
+
+.home-bento-item::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--primary) 5%, transparent),
+    transparent 42%
+  );
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+
+.home-bento-item:hover::after {
+  opacity: 1;
+}
+
+.home-cta-panel {
+  position: relative;
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+  border-radius: 1.25rem;
+  background: color-mix(in oklch, var(--background) 72%, var(--primary));
+  box-shadow: 0 28px 80px -56px
+    color-mix(in oklch, var(--foreground) 36%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+@media (max-width: 767px) {
+  .home-hero {
+    min-height: auto;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .terminal-demo-blink,
   .terminal-demo-spin,
