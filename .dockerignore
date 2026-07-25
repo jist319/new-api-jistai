@@ -1,5 +1,13 @@
 .github
 .git
+/.gitmeta
+/.codex
+/.env
+/.env.*
+**/.env
+**/.env.*
+/data
+/logs
 *.md
 .vscode
 .gitignore
