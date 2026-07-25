@@ -207,6 +207,16 @@ const FooterBar = () => {
             >
               New API
             </a>
+            <span aria-hidden='true'> · </span>
+            <a
+              href='https://github.com/liuyingcai/new-api-jistai'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='!text-semi-color-primary font-medium'
+              aria-label='JistAI 公开仓库'
+            >
+              JistAI 公开仓库
+            </a>
           </div>
         </div>
       </footer>
@@ -238,6 +248,16 @@ const FooterBar = () => {
                 className='!text-semi-color-primary font-medium'
               >
                 New API
+              </a>
+              <span aria-hidden='true'> · </span>
+              <a
+                href='https://github.com/liuyingcai/new-api-jistai'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='!text-semi-color-primary font-medium'
+                aria-label='JistAI 公开仓库'
+              >
+                JistAI 公开仓库
               </a>
             </div>
           </div>
