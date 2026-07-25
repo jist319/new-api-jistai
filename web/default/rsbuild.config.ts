@@ -1,3 +1,5 @@
+import { readFileSync, readdirSync } from 'node:fs'
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -7,6 +9,28 @@ import { pluginTailwindcss } from '@rsbuild/plugin-tailwindcss'
 import { tanstackRouter } from '@tanstack/router-plugin/rspack'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const require = createRequire(import.meta.url)
+const lobeIconSourceDir = path.join(
+  path.dirname(require.resolve('@lobehub/icons-static-svg/package.json')),
+  'icons'
+)
+const lobeIconFiles = readdirSync(lobeIconSourceDir)
+  .filter((file) => /^[a-z0-9-]+\.svg$/.test(file))
+  .sort()
+const lobeIconMaskFiles: string[] = []
+const lobeIconAspectRatios: Record<string, number> = {}
+for (const file of lobeIconFiles) {
+  const source = readFileSync(path.join(lobeIconSourceDir, file), 'utf8')
+  if (source.includes('currentColor')) lobeIconMaskFiles.push(file)
+
+  const viewBox = source.match(/\bviewBox="([^"]+)"/)?.[1]
+  if (!viewBox) continue
+  const [, , width, height] = viewBox.split(/\s+/).map(Number)
+  const ratio = width / height
+  if (Number.isFinite(ratio) && ratio > 0 && Math.abs(ratio - 1) > 1e-6) {
+    lobeIconAspectRatios[file] = ratio
+  }
+}
 
 export default defineConfig(({ envMode }) => {
   const env = loadEnv({ mode: envMode, prefixes: ['VITE_'] })
@@ -56,6 +80,11 @@ export default defineConfig(({ envMode }) => {
       entry: {
         index: './src/main.tsx',
       },
+      define: {
+        __LOBE_ICON_ASPECT_RATIOS__: JSON.stringify(lobeIconAspectRatios),
+        __LOBE_ICON_FILES__: JSON.stringify(lobeIconFiles),
+        __LOBE_ICON_MASK_FILES__: JSON.stringify(lobeIconMaskFiles),
+      },
     },
     resolve: {
       alias: {
@@ -76,6 +105,15 @@ export default defineConfig(({ envMode }) => {
       target: 'web',
       distPath: {
         root: 'dist',
+      },
+      copy: {
+        patterns: [
+          {
+            from: lobeIconSourceDir,
+            to: 'lobe-icons',
+            noErrorOnMissing: false,
+          },
+        ],
       },
       // Rely on Rsbuild default legalComments ("linked" → per-chunk *.LICENSE.txt) in all modes.
       // Do not set "none" in production: that strips minifier-preserved third-party notices and
