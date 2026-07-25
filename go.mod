@@ -4,7 +4,7 @@ module github.com/QuantumNous/new-api
 go 1.25.1
 
 require (
-	github.com/Calcium-Ion/go-epay v0.0.4
+	github.com/Calcium-Ion/go-epay v0.0.5-0.20260612155053-774330a93901
 	github.com/abema/go-mp4 v1.4.1
 	github.com/alicebob/miniredis/v2 v2.35.0
 	github.com/andybalholm/brotli v1.1.1

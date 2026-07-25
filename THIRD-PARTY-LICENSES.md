@@ -10,7 +10,7 @@ Transitive dependencies should be audited before a final external release.
 
 | Area        | Scope       | Ecosystem | Dependency                                            | Version                              | License                                            |
 |-------------|-------------|-----------|-------------------------------------------------------|--------------------------------------|----------------------------------------------------|
-| backend     | production  | Go        | `github.com/Calcium-Ion/go-epay`                      | `v0.0.4`                             | Proprietary/Internal - owned by project maintainer |
+| backend     | production  | Go        | `github.com/Calcium-Ion/go-epay`                      | `v0.0.5-0.20260612155053-774330a93901` | MIT                                                |
 | backend     | production  | Go        | `github.com/abema/go-mp4`                             | `v1.4.1`                             | MIT                                                |
 | backend     | production  | Go        | `github.com/andybalholm/brotli`                       | `v1.1.1`                             | MIT                                                |
 | backend     | production  | Go        | `github.com/anknown/ahocorasick`                      | `v0.0.0-20190904063843-d75dbd5169c0` | MIT                                                |
@@ -327,6 +327,10 @@ PERFORMANCE OF THIS SOFTWARE.
 
 ### MIT
 
+Component-specific copyright notice:
+
+- `github.com/Calcium-Ion/go-epay`: Copyright (c) 2026 Calcium-Ion
+
 MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -358,10 +362,6 @@ https://openfontlicense.org/open-font-license-official-text/
 When distributing font files, preserve the OFL license text, copyright notices,
 and reserved font name restrictions supplied by the upstream font project.
 
-### Proprietary/Internal - owned by project maintainer
-
-This dependency is owned by the project maintainer and is not treated as a third-party open source dependency for this review.
-
 ### Unlicense
 
 The Unlicense
@@ -372,4 +372,3 @@ this software, either in source code form or as a compiled binary, for any
 purpose, commercial or non-commercial, and by any means.
 
 For more information, please refer to https://unlicense.org/
-
