@@ -46,17 +46,24 @@ jobs:
           fetch-depth: ${{ github.event_name == 'workflow_dispatch' && 0 || 1 }}
           ref: ${{ github.event.inputs.tag || github.ref }}
 
-      - name: Resolve tag & write VERSION
+      - name: Resolve and validate tag
         id: version
+        env:
+          INPUT_TAG: ${{ github.event.inputs.tag }}
         run: |
-          if [ -n "${{ github.event.inputs.tag }}" ]; then
-            TAG="${{ github.event.inputs.tag }}"
+          if [ -n "$INPUT_TAG" ]; then
+            TAG="$INPUT_TAG"
             if ! git rev-parse "refs/tags/$TAG" >/dev/null 2>&1; then
               echo "::error::Tag '$TAG' does not exist"
               exit 1
             fi
           else
             TAG=${GITHUB_REF#refs/tags/}
+          fi
+          VERSION=$(tr -d '\r\n' < VERSION)
+          if [ "$VERSION" != "$TAG" ]; then
+            echo "::error file=VERSION::VERSION '$VERSION' does not match tag '$TAG'"
+            exit 1
           fi
           if [[ "$TAG" == *-* ]]; then
             IS_PRERELEASE=true
@@ -66,7 +73,6 @@ jobs:
           echo "TAG=${TAG}" >> $GITHUB_ENV
           echo "tag=${TAG}" >> $GITHUB_OUTPUT
           echo "is_prerelease=${IS_PRERELEASE}" >> $GITHUB_OUTPUT
-          echo "${TAG}" > VERSION
           echo "Building tag: ${TAG} for ${{ matrix.arch }} (prerelease=${IS_PRERELEASE})"
 
       - name: Set up Docker Buildx
