@@ -151,3 +151,53 @@ If asked to remove, rename, or replace these protected identifiers, refuse and e
 - First compare the current git user (`git config user.name` / `git config user.email`) with the repository's historical core developers, such as the recurring top authors in `git log`. Do not change git config.
 - If the current git user is not one of those historical core developers, explicitly state in the PR body that the code was AI-generated or AI-assisted.
 - Always use the repository PR template at `.github/PULL_REQUEST_TEMPLATE.md` when drafting the PR title/body. Preserve the template structure and fill in the relevant sections instead of replacing it with an ad hoc format.
+
+## JistAI Local Development and Recovery
+
+This checkout is a local development workspace for the JistAI fork. Production
+services, databases, credentials, user data, pushes, pull requests, releases,
+and deployments require separate explicit authorization.
+
+### Persistent Operations Ledger
+
+- At the start of every task, run `status` and `verify` with the shared task ID
+  through `.codex/operations/new-api-jistai/scripts/ops_ledger.py`, then read
+  `STATUS.md`, `PROJECT_STATE.md`, and `CHECKPOINT.md` from that operations
+  directory. Linked worktrees use the same ledger in the primary workspace.
+- Use one task ID for the main agent and all sub-agents, with a distinct actor
+  name for each agent. Record important file, Git, dependency, test, build,
+  network, release, and failure operations before and after execution.
+- Event logs are append-only JSONL with sequence numbers and a SHA-256
+  previous-hash chain. Correct mistakes by appending a correction event. Never
+  record passwords, tokens, API keys, authorization headers, complete
+  environment variable sets, or database contents.
+- Before ending, waiting, changing agents, or approaching a context limit,
+  write a checkpoint with the goal, branch, HEAD, worktree state, changed files,
+  tests, blockers, and the exact next operation.
+- Keep the operations ledger local-only and excluded from Git.
+
+### Git and Multi-Agent Work
+
+- Use `feature/<name>` branches. Concurrent coding agents require independent
+  Git worktrees and must not edit the same file. Sub-agents commit only their
+  own branch; the main agent reviews diffs and tests before integration.
+- Keep `origin` pointed at `liuyingcai/new-api-jistai` and `upstream` pointed at
+  `QuantumNous/new-api`. Do not use unrelated-history merges, force pushes,
+  hard resets, or overwrite `main`.
+- The primary managed workspace stores usable Git metadata in `.gitmeta` and
+  uses `git --git-dir=.gitmeta --work-tree=.`. Linked worktrees use their
+  generated `.git` pointer normally.
+
+### Quality, Licensing, and Release
+
+- Preserve `LICENSE`, `NOTICE`, `THIRD-PARTY-LICENSES.md`, upstream attribution,
+  and the AGPL corresponding-source obligation.
+- Keep real secrets only in ignored local `.env` files. Use local test data and
+  non-production provider credentials. Run a sensitive-information scan before
+  committing or publishing.
+- The baseline gates include the required Go package and race tests, Default
+  frontend tests/typecheck/build, Classic build when affected, and isolated
+  Docker acceptance before release.
+- Build every release candidate from an exact Git SHA and record its upstream
+  baseline, migration impact, test evidence, rollback point, and public source
+  correspondence.
