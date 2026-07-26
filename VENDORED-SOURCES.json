@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Pinned provenance, local modifications, attribution, and license evidence for third-party source material retained in this repository.",
+  "sources": [
+    {
+      "id": "shadcn-ui-agent-skill",
+      "name": "shadcn/ui agent skill snapshot",
+      "repository": "https://github.com/shadcn-ui/ui",
+      "revision": "56161142f1b83f612462772d18883807b5f0d601",
+      "commitTreeGitSha1": "7a604981a701bc097e181848a2b0d3ba63435101",
+      "sourcePath": "skills/shadcn",
+      "sourceTreeGitSha1": "a8404703769866faf15bee897c9ae6e252ac2d35",
+      "localPath": ".agents/skills/shadcn-ui",
+      "localTreeGitSha1": "7b461768b2dc12897a411e49d7d10a6f5e87dafd",
+      "licenseExpression": "MIT",
+      "attribution": "Copyright (c) 2023 shadcn",
+      "licenseEvidence": [
+        {
+          "sourcePath": "LICENSE.md",
+          "sourceUrl": "https://github.com/shadcn-ui/ui/blob/56161142f1b83f612462772d18883807b5f0d601/LICENSE.md",
+          "gitBlobSha1": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+          "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+        }
+      ],
+      "licenseTermsFile": "third_party/licenses/shadcn-ui-MIT.txt",
+      "licenseTermsGitBlobSha1": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+      "licenseTermsSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "localModifications": [
+        "mcp.md and the five rules/*.md files are exact upstream blobs.",
+        "cli.md changes two internal links; customization.md changes one equivalent internal link.",
+        "Upstream SKILL.md is stored as official-shadcn-ui-workflow.md with frontmatter removed and a local source note added.",
+        "The local root SKILL.md is a project-aware wrapper for web/default and Bun.",
+        "UPSTREAM.txt is local provenance metadata.",
+        "Upstream agents/openai.yml, PNG assets, and evals/evals.json are omitted."
+      ]
+    },
+    {
+      "id": "vercel-react-best-practices",
+      "name": "Vercel React Best Practices",
+      "repository": "https://github.com/vercel-labs/agent-skills",
+      "revision": "e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff",
+      "commitTreeGitSha1": "70bacf782cbb14439193af23bc870e2118c4f6a0",
+      "sourcePath": "skills/react-best-practices",
+      "sourceTreeGitSha1": "079b06a135401704ea94ab74c7c9d86c92ba259f",
+      "localPath": ".agents/skills/vercel-react-best-practices",
+      "localTreeGitSha1": "71600b94d46e8ad1cec42502be000f038d5d514b",
+      "licenseExpression": "MIT",
+      "attribution": "Vercel Engineering; metadata author: vercel; originally created by @shuding at Vercel",
+      "sourceLicenseNote": "The pinned source identifies MIT in README.md and SKILL.md but contains no standalone LICENSE, LICENCE, COPYING, NOTICE, or formal copyright line.",
+      "licenseEvidence": [
+        {
+          "sourcePath": "README.md",
+          "sourceUrl": "https://github.com/vercel-labs/agent-skills/blob/e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff/README.md",
+          "assertion": "The License section identifies MIT.",
+          "gitBlobSha1": "48c1db2dca60874f3f1e01928a0a70e2002212ca",
+          "sha256": "9af6cf8f42cc5bf0594849f5ca7e06d645087a142fbfd4fcb614bf7fbafd41b2"
+        },
+        {
+          "sourcePath": "skills/react-best-practices/SKILL.md",
+          "sourceUrl": "https://github.com/vercel-labs/agent-skills/blob/e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff/skills/react-best-practices/SKILL.md",
+          "assertion": "Frontmatter identifies license MIT and metadata author vercel.",
+          "gitBlobSha1": "1ad7750e572f8e28ce21090dc1049fa7eecd8cae",
+          "sha256": "61860fd4249cf5e5ec917a08aceebed48ccf9b38d526e3cb73e0b18aaf261dac"
+        }
+      ],
+      "licenseTermsFile": "third_party/licenses/vercel-react-best-practices-MIT.txt",
+      "licenseTermsGitBlobSha1": "a7dc2993e184dd879dde90e4e387ea8b4b0aa896",
+      "licenseTermsSha256": "c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f",
+      "copiedContent": {
+        "sourcePath": "skills/react-best-practices/AGENTS.md",
+        "localPath": ".agents/skills/vercel-react-best-practices/references/full-guide.md",
+        "gitBlobSha1": "db951abe78a833270dc3292fdaaef15d03b6b1c1",
+        "sha256": "be5257266331a38b025243e813b6dfe2b50659a9b7990a3556c1110cfc9d5e91"
+      },
+      "localModifications": [
+        "references/full-guide.md is an exact copy of the pinned upstream AGENTS.md blob.",
+        "The local SKILL.md is a shorter project wrapper that points to the full guide."
+      ]
+    }
+  ]
+}

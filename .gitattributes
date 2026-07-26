@@ -10,6 +10,9 @@
 *.yml text eol=lf
 *.toml text eol=lf
 *.md text eol=lf
+*.txt text eol=lf
+go.mod text eol=lf
+go.sum text eol=lf
 VERSION text eol=lf
 
 # Keep the generated legal bundle byte-for-byte, including upstream whitespace.

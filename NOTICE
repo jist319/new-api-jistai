@@ -31,8 +31,9 @@ https://github.com/liuyingcai/new-api-jistai
 ==== Third-Party Notices ====
 
 This product includes third-party software. Copyright notices and license
-terms for direct and transitive distributed dependencies are listed in
-THIRD-PARTY-LICENSES.md.
+terms for direct and transitive distributed dependencies and vendored source
+materials are listed in THIRD-PARTY-LICENSES.md. Machine-readable source
+provenance for vendored materials is recorded in VENDORED-SOURCES.json.
 
 Apache-2.0 upstream NOTICE entries identified for direct dependencies are
 reproduced below. Preserve this file with Docker images, standalone binaries,
@@ -58,5 +59,24 @@ Paul Querna (http://paul.querna.org/).
 Desktop distributions include Electron, which embeds Chromium, Node.js, V8,
 and other third-party components. Electron and Chromium third-party license
 notices must remain available with desktop installers and installed apps.
+
+==== Vendored Agent Skills ====
+
+This source distribution includes a modified snapshot of the shadcn/ui
+agent skill from https://github.com/shadcn-ui/ui at revision
+56161142f1b83f612462772d18883807b5f0d601.
+Licensed under the MIT License.
+Copyright (c) 2023 shadcn.
+The local copy contains documented project-specific modifications.
+
+This source distribution includes Vercel React Best Practices material from
+https://github.com/vercel-labs/agent-skills at revision
+e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff.
+The source identifies the material as MIT licensed and attributes it to
+Vercel Engineering, originally created by @shuding at Vercel.
+That revision contains no standalone license file or formal copyright line.
+
+The applicable MIT License terms are reproduced in
+THIRD-PARTY-LICENSES.md.
 
 ==== End of Notices ====
