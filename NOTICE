@@ -24,10 +24,14 @@ https://github.com/QuantumNous/new-api
 Modified versions must not misrepresent the origin of the software and must
 mark their changes in accordance with AGPLv3 Section 7(c).
 
+JistAI modified source and corresponding-source repository:
+
+https://github.com/liuyingcai/new-api-jistai
+
 ==== Third-Party Notices ====
 
-This product includes third-party open source software. Copyright notices and
-license terms for direct third-party dependencies are listed in
+This product includes third-party software. Copyright notices and license
+terms for direct and transitive distributed dependencies are listed in
 THIRD-PARTY-LICENSES.md.
 
 Apache-2.0 upstream NOTICE entries identified for direct dependencies are

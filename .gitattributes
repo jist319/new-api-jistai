@@ -10,6 +10,10 @@
 *.yml text eol=lf
 *.toml text eol=lf
 *.md text eol=lf
+VERSION text eol=lf
+
+# Keep the generated legal bundle byte-for-byte, including upstream whitespace.
+THIRD-PARTY-LICENSES.md -text -whitespace
 
 # JavaScript/TypeScript files
 *.js text eol=lf
