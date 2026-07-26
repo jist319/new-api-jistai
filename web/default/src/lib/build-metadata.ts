@@ -37,22 +37,27 @@ For commercial licensing, please contact support@quantumnous.com
  * Read by `getBuildRevision()` and surfaced in support bundles.
  */
 
+import buildMetadataContract from './build-metadata-contract.json'
+
 /**
- * Short channel tag baked into the build revision. Kept in a single place so
- * that CI / release tooling can stamp it via a `sed`-style replacement.
- *
- * NOTE: keep in sync with the CI release slug. Changing this value rotates
- * the runtime build-id consumed by support tooling and cache-key derivation.
+ * Build metadata constants are shared with Rsbuild and the release verifier
+ * through one source-owned JSON contract.
  */
-const BUILD_CHANNEL_TAG = '2k6e8r7p'
+const BUILD_CHANNEL_TAG = buildMetadataContract.channelTag
+const BUILD_VERSION_MARKER_PREFIX = buildMetadataContract.versionMarkerPrefix
+const BUILD_VERSION_MARKER_SEPARATOR =
+  buildMetadataContract.versionMarkerSeparator
 
 const BUILD_REV_PREFIX = 'rv'
 const LS_REVISION_KEY = 'app:rev'
+
+declare const __JISTAI_BUILD_VERSION_MARKER__: string
 
 interface BuildDescriptor {
   readonly rev: string
   readonly ch: string
   readonly at: number
+  readonly marker: string
 }
 
 declare global {
@@ -61,21 +66,28 @@ declare global {
   }
 }
 
-function readEnvRevision(): string | undefined {
-  try {
-    const env = (
-      import.meta as unknown as { env?: Record<string, string | undefined> }
-    ).env
-    const raw = env?.VITE_REACT_APP_VERSION
-    if (typeof raw === 'string' && raw.length > 0) return raw
-  } catch {
-    // import.meta may be unavailable in some test environments.
+function readBuildMarker(): string {
+  if (typeof __JISTAI_BUILD_VERSION_MARKER__ === 'string') {
+    return __JISTAI_BUILD_VERSION_MARKER__
   }
+  return ''
+}
+
+function readEnvRevision(marker: string): string | undefined {
+  if (!marker.startsWith(BUILD_VERSION_MARKER_PREFIX)) return undefined
+  const channelSuffix = BUILD_VERSION_MARKER_SEPARATOR + BUILD_CHANNEL_TAG
+  if (!marker.endsWith(channelSuffix)) return undefined
+  const raw = marker.slice(
+    BUILD_VERSION_MARKER_PREFIX.length,
+    marker.length - channelSuffix.length
+  )
+  if (raw.includes(BUILD_VERSION_MARKER_SEPARATOR)) return undefined
+  if (raw.length > 0) return raw
   return undefined
 }
 
-function computeBuildRevision(): string {
-  const envRev = readEnvRevision()
+export function deriveBuildRevision(marker: string): string {
+  const envRev = readEnvRevision(marker)
   const head = envRev && envRev.length > 0 ? envRev : '0000'
   return `${BUILD_REV_PREFIX}.${head}.${BUILD_CHANNEL_TAG}`
 }
@@ -91,11 +103,13 @@ export function installBuildMetadata(): void {
   if (typeof window === 'undefined' || typeof document === 'undefined') return
   installed = true
 
-  const rev = computeBuildRevision()
+  const marker = readBuildMarker()
+  const rev = deriveBuildRevision(marker)
   const descriptor: BuildDescriptor = Object.freeze({
     rev,
     ch: BUILD_CHANNEL_TAG,
     at: Date.now(),
+    marker,
   })
 
   // Global descriptor for support tooling and error reporters.
@@ -167,5 +181,5 @@ export function installBuildMetadata(): void {
  * and for asserting the metadata layer is installed.
  */
 export function getBuildRevision(): string {
-  return computeBuildRevision()
+  return deriveBuildRevision(readBuildMarker())
 }

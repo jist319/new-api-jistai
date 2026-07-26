@@ -17,6 +17,7 @@ cd web
 bun install --frozen-lockfile
 cd default
 DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION="$VERSION" bun run build
+node scripts/verify-build-version.mjs --dist dist --version "$VERSION"
 cd ../classic
 VITE_REACT_APP_VERSION="$VERSION" bun run build
 

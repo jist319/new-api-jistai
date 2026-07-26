@@ -76,6 +76,8 @@ jobs:
         run: go test -race ./setting ./model ./middleware
       - name: Test fast third-party license verifier
         run: node --test bin/license-audit/verify-license-lock.test.cjs
+      - name: Test frontend build-version verifier
+        run: node --test web/default/scripts/verify-build-version.node.mjs
       - name: Verify third-party license bundle
         run: bash bin/license-audit/run.sh --check
       - name: Install frozen frontend dependencies
@@ -87,6 +89,7 @@ jobs:
           bun test
           bun run typecheck
           VITE_REACT_APP_VERSION="$VERSION" bun run build
+          node scripts/verify-build-version.mjs --dist dist --version "$VERSION"
       - name: Build Classic frontend
         working-directory: web/classic
         run: VITE_REACT_APP_VERSION="$VERSION" bun run build
@@ -117,6 +120,7 @@ jobs:
           bun install --frozen-lockfile --ignore-scripts
           cd default
           DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$VERSION bun run build
+          node scripts/verify-build-version.mjs --dist dist --version "$VERSION"
           cd ../..
       - name: Build Frontend (classic)
         env:
@@ -194,6 +198,7 @@ jobs:
           bun install --frozen-lockfile --ignore-scripts
           cd default
           DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$VERSION bun run build
+          node scripts/verify-build-version.mjs --dist dist --version "$VERSION"
           cd ../..
       - name: Build Frontend (classic)
         env:
@@ -269,6 +274,7 @@ jobs:
           bun install --frozen-lockfile --ignore-scripts
           cd default
           DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$VERSION bun run build
+          node scripts/verify-build-version.mjs --dist dist --version "$VERSION"
           cd ../..
       - name: Build Frontend (classic)
         env:

@@ -17,12 +17,12 @@ all: build-all-web start-api
 build-web:
 	@echo "Building default web..."
 	@cd ./web && bun install --frozen-lockfile
-	@cd $(WEB_DIR) && DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION=$(cat ../../VERSION) bun run build
+	@cd $(WEB_DIR) && VERSION="$$(tr -d '\r\n' < ../../VERSION)" && DISABLE_ESLINT_PLUGIN='true' VITE_REACT_APP_VERSION="$$VERSION" bun run build && bun scripts/verify-build-version.mjs --dist dist --version "$$VERSION"
 
 build-web-classic:
 	@echo "Building classic web..."
 	@cd ./web && bun install --frozen-lockfile
-	@cd $(WEB_CLASSIC_DIR) && VITE_REACT_APP_VERSION=$(cat ../../VERSION) bun run build
+	@cd $(WEB_CLASSIC_DIR) && VITE_REACT_APP_VERSION="$$(tr -d '\r\n' < ../../VERSION)" bun run build
 
 build-all-web: build-web build-web-classic
 

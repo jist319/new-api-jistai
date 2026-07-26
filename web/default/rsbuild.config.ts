@@ -10,6 +10,16 @@ import { tanstackRouter } from '@tanstack/router-plugin/rspack'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const require = createRequire(import.meta.url)
+const buildMetadataContract = JSON.parse(
+  readFileSync(
+    path.join(__dirname, 'src/lib/build-metadata-contract.json'),
+    'utf8'
+  )
+) as {
+  channelTag: string
+  versionMarkerPrefix: string
+  versionMarkerSeparator: string
+}
 const lobeIconSourceDir = path.join(
   path.dirname(require.resolve('@lobehub/icons-static-svg/package.json')),
   'icons'
@@ -34,6 +44,12 @@ for (const file of lobeIconFiles) {
 
 export default defineConfig(({ envMode }) => {
   const env = loadEnv({ mode: envMode, prefixes: ['VITE_'] })
+  const buildVersion = env.rawPublicVars.VITE_REACT_APP_VERSION ?? ''
+  const buildVersionMarker =
+    buildMetadataContract.versionMarkerPrefix +
+    buildVersion +
+    buildMetadataContract.versionMarkerSeparator +
+    buildMetadataContract.channelTag
   const serverUrl =
     process.env.VITE_REACT_APP_SERVER_URL ||
     env.rawPublicVars.VITE_REACT_APP_SERVER_URL ||
@@ -81,6 +97,7 @@ export default defineConfig(({ envMode }) => {
         index: './src/main.tsx',
       },
       define: {
+        __JISTAI_BUILD_VERSION_MARKER__: JSON.stringify(buildVersionMarker),
         __LOBE_ICON_ASPECT_RATIOS__: JSON.stringify(lobeIconAspectRatios),
         __LOBE_ICON_FILES__: JSON.stringify(lobeIconFiles),
         __LOBE_ICON_MASK_FILES__: JSON.stringify(lobeIconMaskFiles),
