@@ -28,13 +28,15 @@ ENV GO111MODULE=on CGO_ENABLED=0
 ARG TARGETOS
 ARG TARGETARCH
 ARG GO_DOWNLOAD_GODEBUG=
+ARG GO_DOWNLOAD_GOPROXY=
 ENV GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH:-amd64}
 ENV GOEXPERIMENT=greenteagc
 
 WORKDIR /build
 
 ADD go.mod go.sum ./
-RUN GODEBUG="${GO_DOWNLOAD_GODEBUG}" go mod download
+RUN if [ -n "${GO_DOWNLOAD_GOPROXY}" ]; then export GOPROXY="${GO_DOWNLOAD_GOPROXY}"; fi \
+    && GODEBUG="${GO_DOWNLOAD_GODEBUG}" go mod download
 
 COPY . .
 COPY --from=builder /build/web/default/dist ./web/default/dist
