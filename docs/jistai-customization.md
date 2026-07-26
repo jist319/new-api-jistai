@@ -1,6 +1,6 @@
 # JistAI 二次开发维护说明
 
-本分支基于 QuantumNous/new-api `v1.0.0-rc.21`，保留原项目名称、版权、NOTICE 和 AGPL-3.0 许可信息。JistAI 的定制代码只扩展首页和模型请求并发控制，不替换上游项目身份。
+本分支基于 QuantumNous/new-api `v1.0.0-rc.21`，保留原项目名称、版权、NOTICE 和 AGPL-3.0 许可信息。JistAI 的业务功能定制主要扩展首页和模型请求并发控制，同时增加发布、源码归档和许可证合规门禁；这些改动不替换上游项目身份。
 
 ## 首页
 
@@ -75,8 +75,8 @@ bun run build
 
 ## 构建版本
 
-上游仓库提交的 `VERSION` 是空占位文件，官方 CI 会在 Docker 构建前写入发布标签。JistAI 构建也必须在隔离的 Git archive 构建上下文中注入明确版本，例如 `v1.0.0-rc.21-jistai.<12 位提交号>`，不要为了单次发布修改源码工作树中的占位文件。
+JistAI 的历史保留分支会在 `VERSION` 中跟踪非空、以 `v` 开头的语义化版本；本 RC 的值为 `v1.0.0-rc.21.jistai.1`。发布标签必须与 `VERSION` 逐字一致，后端、Default 前端、Electron 和 Docker 构建都只读取这个版本并执行一致性校验，不得在构建过程中覆写它。准备下一个版本时，应在单独的受审提交中更新 `VERSION`，并从新的精确提交重新运行全部发布门禁。
 
-镜像还必须使用完整 Git 提交号作为不可变 tag，并写入 `org.opencontainers.image.revision` OCI label。后台显示版本、镜像 tag 和 revision label 三者共同用于定位实际源码；不能把二次开发镜像标记成未经修改的上游 `v1.0.0-rc.21`。
+镜像还必须使用完整 Git 提交号作为不可变 tag，并把同一完整提交号写入 `org.opencontainers.image.revision` OCI label。后台显示版本、镜像 tag 和 revision label 三者共同用于定位公开的实际源码；不能把二次开发镜像标记成未经修改的上游 `v1.0.0-rc.21`。
 
 本功能不新增数据库表或迁移。两个 option 继续使用 new-api 现有 option 持久化机制。
