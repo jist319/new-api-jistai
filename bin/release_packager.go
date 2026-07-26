@@ -34,8 +34,16 @@ import (
 )
 
 var (
-	tarEpoch = time.Unix(0, 0).UTC()
-	zipEpoch = time.Date(1980, 1, 1, 0, 0, 0, 0, time.UTC)
+	tarEpoch               = time.Unix(0, 0).UTC()
+	zipEpoch               = time.Date(1980, 1, 1, 0, 0, 0, 0, time.UTC)
+	requiredLegalArtifacts = []string{
+		"LICENSE",
+		"NOTICE",
+		"THIRD-PARTY-LICENSES.md",
+		"VENDORED-SOURCES.json",
+		"third_party/licenses/shadcn-ui-MIT.txt",
+		"third_party/licenses/vercel-react-best-practices-MIT.txt",
+	}
 )
 
 type archiveEntry struct {
@@ -59,6 +67,9 @@ func main() {
 func packageRelease(format, source, output string) error {
 	if source == "" || output == "" {
 		return errors.New("source and output are required")
+	}
+	if err := validateLegalArtifacts(source); err != nil {
+		return err
 	}
 
 	entries, err := collectEntries(source)
@@ -96,12 +107,44 @@ func packageRelease(format, source, output string) error {
 	return nil
 }
 
+func validateLegalArtifacts(source string) error {
+	root, err := filepath.Abs(source)
+	if err != nil {
+		return fmt.Errorf("resolve source: %w", err)
+	}
+	rootInfo, err := os.Lstat(root)
+	if err != nil {
+		return fmt.Errorf("stat source: %w", err)
+	}
+	if !rootInfo.IsDir() {
+		return errors.New("source must be a directory")
+	}
+
+	for _, name := range requiredLegalArtifacts {
+		artifactPath := filepath.Join(root, filepath.FromSlash(name))
+		info, statErr := os.Lstat(artifactPath)
+		if statErr != nil {
+			if errors.Is(statErr, os.ErrNotExist) {
+				return fmt.Errorf("required legal artifact is missing: %s", name)
+			}
+			return fmt.Errorf("stat required legal artifact %s: %w", name, statErr)
+		}
+		if info.Mode()&os.ModeSymlink != 0 || !info.Mode().IsRegular() {
+			return fmt.Errorf("required legal artifact must be a regular file: %s", name)
+		}
+		if info.Size() == 0 {
+			return fmt.Errorf("required legal artifact must not be empty: %s", name)
+		}
+	}
+	return nil
+}
+
 func collectEntries(source string) ([]archiveEntry, error) {
 	root, err := filepath.Abs(source)
 	if err != nil {
 		return nil, fmt.Errorf("resolve source: %w", err)
 	}
-	rootInfo, err := os.Stat(root)
+	rootInfo, err := os.Lstat(root)
 	if err != nil {
 		return nil, fmt.Errorf("stat source: %w", err)
 	}

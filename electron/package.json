@@ -73,6 +73,14 @@
           "to": "licenses/THIRD-PARTY-LICENSES.md"
         },
         {
+          "from": "../VENDORED-SOURCES.json",
+          "to": "licenses/VENDORED-SOURCES.json"
+        },
+        {
+          "from": "../third_party/licenses",
+          "to": "licenses/third_party/licenses"
+        },
+        {
           "from": "node_modules/electron/dist/LICENSE",
           "to": "licenses/electron/LICENSE"
         },
@@ -104,6 +112,14 @@
         {
           "from": "../THIRD-PARTY-LICENSES.md",
           "to": "licenses/THIRD-PARTY-LICENSES.md"
+        },
+        {
+          "from": "../VENDORED-SOURCES.json",
+          "to": "licenses/VENDORED-SOURCES.json"
+        },
+        {
+          "from": "../third_party/licenses",
+          "to": "licenses/third_party/licenses"
         },
         {
           "from": "node_modules/electron/dist/LICENSE",
@@ -138,6 +154,14 @@
         {
           "from": "../THIRD-PARTY-LICENSES.md",
           "to": "licenses/THIRD-PARTY-LICENSES.md"
+        },
+        {
+          "from": "../VENDORED-SOURCES.json",
+          "to": "licenses/VENDORED-SOURCES.json"
+        },
+        {
+          "from": "../third_party/licenses",
+          "to": "licenses/third_party/licenses"
         },
         {
           "from": "node_modules/electron/dist/LICENSE",

@@ -11,6 +11,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ghcr.io/${{ github.repository }}
+  NODE_VERSION: "24.18.0"
 
 concurrency:
   group: docker-branch-${{ inputs.branch }}
@@ -34,6 +35,11 @@ jobs:
         with:
           fetch-depth: 1
           ref: refs/heads/${{ inputs.branch }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Validate distribution metadata
         run: bash bin/validate-release-metadata.sh
@@ -88,6 +94,11 @@ jobs:
         with:
           fetch-depth: 1
           ref: ${{ needs.prepare.outputs.sha }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Validate distribution metadata
         run: bash bin/validate-release-metadata.sh

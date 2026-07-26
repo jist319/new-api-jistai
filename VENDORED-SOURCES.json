@@ -23,8 +23,14 @@
         }
       ],
       "licenseTermsFile": "third_party/licenses/shadcn-ui-MIT.txt",
-      "licenseTermsGitBlobSha1": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+      "licenseTermsLocalGitBlobSha1": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
       "licenseTermsSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "licenseTermsOrigin": {
+        "type": "upstream-exact",
+        "sourcePath": "LICENSE.md",
+        "sourceGitBlobSha1": "fad4d887a681dd49233e5ed01ee2c7a1513089a0",
+        "sourceSha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+      },
       "localModifications": [
         "mcp.md and the five rules/*.md files are exact upstream blobs.",
         "cli.md changes two internal links; customization.md changes one equivalent internal link.",
@@ -64,8 +70,16 @@
         }
       ],
       "licenseTermsFile": "third_party/licenses/vercel-react-best-practices-MIT.txt",
-      "licenseTermsGitBlobSha1": "a7dc2993e184dd879dde90e4e387ea8b4b0aa896",
+      "licenseTermsLocalGitBlobSha1": "a7dc2993e184dd879dde90e4e387ea8b4b0aa896",
       "licenseTermsSha256": "c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f",
+      "licenseTermsOrigin": {
+        "type": "locally-assembled-standard-text",
+        "sourcePaths": [
+          "README.md",
+          "skills/react-best-practices/SKILL.md"
+        ],
+        "note": "Pinned source declares MIT but provides no standalone terms file; the local file reproduces standard MIT terms and preserves source attribution without inventing a copyright line."
+      },
       "copiedContent": {
         "sourcePath": "skills/react-best-practices/AGENTS.md",
         "localPath": ".agents/skills/vercel-react-best-practices/references/full-guide.md",
