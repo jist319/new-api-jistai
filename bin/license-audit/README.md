@@ -27,7 +27,16 @@ The write mode updates `THIRD-PARTY-LICENSES.md` and
 commit the generated files separately. Audit reports and installed dependency
 trees are temporary derived data and are not committed.
 
-`bin/validate-release-metadata.sh` performs the fast release check: it validates
-the input hash lock and runs the vendored-source scanner against the tracked
-bundle. The full audit runner remains the authoritative stale-bundle gate for
-dependency changes and release candidates.
+`bin/validate-release-metadata.sh` performs the fast release check. The separate
+`verify-license-lock.cjs` consumer validates the canonical lock schema, exact
+21-file input set and hashes, generated bundle hash, and zero-issue audit
+summary. The validator then runs the vendored-source scanner against the
+tracked bundle. Test the fast verifier and its fail-closed fixtures with:
+
+```bash
+node --test bin/license-audit/verify-license-lock.test.cjs
+```
+
+The fast verifier is a release-layer consumer and is intentionally not an input
+to bundle generation. The full audit runner remains the authoritative
+stale-bundle gate for dependency changes and release candidates.

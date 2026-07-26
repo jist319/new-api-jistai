@@ -2,6 +2,9 @@
 
 set -euo pipefail
 
+ROOT_DIR=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$ROOT_DIR"
+
 EXPECTED_VERSION="${1:-}"
 
 fail() {
@@ -36,7 +39,7 @@ if [[ -n "$EXPECTED_VERSION" && "$VERSION_VALUE" != "$EXPECTED_VERSION" ]]; then
   fail VERSION "VERSION '$VERSION_VALUE' does not match '$EXPECTED_VERSION'"
 fi
 
-for file in LICENSE NOTICE THIRD-PARTY-LICENSES.md; do
+for file in LICENSE NOTICE THIRD-PARTY-LICENSES.md VENDORED-SOURCES.json third_party/license-audit-lock.json; do
   [[ -s "$file" ]] || fail "$file" "$file is required and must not be empty"
 done
 
@@ -51,5 +54,17 @@ grep -Fq 'https://github.com/QuantumNous/new-api' NOTICE \
   || fail NOTICE 'Required upstream attribution link is missing'
 grep -Fq 'https://github.com/liuyingcai/new-api-jistai' NOTICE \
   || fail NOTICE 'Required JistAI corresponding-source link is missing'
+
+command -v node >/dev/null 2>&1 \
+  || fail bin/license-audit/verify-license-lock.cjs 'Node.js is required for license validation'
+node bin/license-audit/verify-license-lock.cjs \
+  --root . \
+  --lock third_party/license-audit-lock.json \
+  || fail third_party/license-audit-lock.json 'Third-party license input lock validation failed'
+node bin/license-audit/scan-vendored-sources.cjs \
+  --root . \
+  --manifest VENDORED-SOURCES.json \
+  --bundle THIRD-PARTY-LICENSES.md \
+  || fail VENDORED-SOURCES.json 'Vendored-source license validation failed'
 
 printf 'Release metadata validated for %s\n' "$VERSION_VALUE"

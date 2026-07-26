@@ -74,6 +74,8 @@ jobs:
         run: go test ./setting ./model ./middleware ./router ./bin
       - name: Test backend packages with race detector
         run: go test -race ./setting ./model ./middleware
+      - name: Test fast third-party license verifier
+        run: node --test bin/license-audit/verify-license-lock.test.cjs
       - name: Verify third-party license bundle
         run: bash bin/license-audit/run.sh --check
       - name: Install frozen frontend dependencies
