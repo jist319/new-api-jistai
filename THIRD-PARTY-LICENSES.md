@@ -1,6 +1,6 @@
 # Third-Party Licenses
 
-This file is generated deterministically from the locked Go, web, and Electron dependency closures.
+This file is generated deterministically from the locked Go, web, and Electron dependency closures and the pinned vendored-source manifest.
 It must be distributed with Docker images, standalone binaries, frontend bundles, and Electron installers.
 
 ## Generation Inputs
@@ -9,10 +9,15 @@ It must be distributed with Docker images, standalone binaries, frontend bundles
 |---|---:|---|
 | `classic-1.json` | 1596667 | `22bc0387075cbdb631d2d5979149c74f044b24a9cc222bed8505ca25564e6cfc` |
 | `default-1.json` | 1154407 | `e4426909c198af5150fa011f595215a29056be4c23174c59bb5b613a13bab704` |
-| `electron-1.json` | 990961 | `2d934de74a97fd823609489c1aec29110e4622cb84b36b9ef1c5044ecf14d147` |
-| `generate-third-party.cjs` | 21822 | `281689084a68932babcd963a6355f0da71303e599cb5402303c8f74ea65ca023` |
-| `go-1.json` | 891075 | `394e7f35289b2e23682e10e51a9681e8d2ff10a71478615186c7fa1e42d8c667` |
+| `electron-1.json` | 990961 | `f1d9d9df02506c4281387235181782990d1ed9d172114e88f8b122cff878f0cf` |
+| `generate-third-party.cjs` | 37048 | `73daeb8d1e0942c50940b721c986587401ce9bf8c3d7698d2279a5d58e5a4da3` |
+| `go-1.json` | 891075 | `03580e7f41b89362077cbf339b2141654e3b96d6ed1ee05af2d51d184e79a78d` |
 | `license-overrides.complete-1.json` | 242168 | `5f968ec6156df2aeef872d3afd56747090f6445e2c68ae80f99333eb9434bb0b` |
+| `scan-vendored-sources.cjs` | 20455 | `ce2b52cfeecbb674e52a2206dd28eadb7699a6fdcd79655c59dbaa98327b5b3e` |
+| `third_party/licenses/shadcn-ui-MIT.txt` | 1063 | `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f` |
+| `third_party/licenses/vercel-react-best-practices-MIT.txt` | 1384 | `c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f` |
+| `vendored-1.json` | 16033 | `914c43ed37dd0bb7270ce90f0b228979c8f0b057824205119b39fdad59074bbb` |
+| `VENDORED-SOURCES.json` | 5260 | `3e94ffaf425530e7b6928013a41732bcd2720a2e45774f291fc20a77ff8d5bc0` |
 
 ## Dependency Inventory
 
@@ -1327,6 +1332,82 @@ It must be distributed with Docker images, standalone binaries, frontend bundles
 | electron/build | transitive | npm | `yargs` | `17.7.2` | MIT | `sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==` | `2f1a503bfab84b3ba7393627308b3274501e459e3b5185bbb56bbf16cb1602d4` |
 | electron/build | transitive | npm | `yauzl` | `2.10.0` | MIT | `sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==` | `b303783d5eb7ca50b853ffa5f145e4e7998fab339831d848f507ca6cd970577a` |
 | electron/build | transitive | npm | `yocto-queue` | `0.1.0` | MIT | `sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==` | `5c932d88256b4ab958f64a856fa48e8bd1f55bc1d96b8149c65689e0c61789d3` |
+| vendored/source | vendored | source | `shadcn-ui-agent-skill` | `56161142f1b83f612462772d18883807b5f0d601` | MIT | `commit-tree:7a604981a701bc097e181848a2b0d3ba63435101; source-tree:a8404703769866faf15bee897c9ae6e252ac2d35; local-tree:7b461768b2dc12897a411e49d7d10a6f5e87dafd; terms:1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f` | `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f` |
+| vendored/source | vendored | source | `vercel-react-best-practices` | `e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff` | MIT | `commit-tree:70bacf782cbb14439193af23bc870e2118c4f6a0; source-tree:079b06a135401704ea94ab74c7c9d86c92ba259f; local-tree:71600b94d46e8ad1cec42502be000f038d5d514b; terms:c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f` | `c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f` |
+
+## Vendored Source Provenance
+
+### `shadcn-ui-agent-skill`
+
+Name: shadcn/ui agent skill snapshot
+
+Repository: https://github.com/shadcn-ui/ui
+
+Pinned revision: `56161142f1b83f612462772d18883807b5f0d601`
+
+Commit tree Git SHA-1: `7a604981a701bc097e181848a2b0d3ba63435101`
+
+Upstream source: `skills/shadcn` at tree `a8404703769866faf15bee897c9ae6e252ac2d35`
+
+Local source: `.agents/skills/shadcn-ui` at tree `7b461768b2dc12897a411e49d7d10a6f5e87dafd`
+
+License: `MIT`
+
+Attribution: Copyright (c) 2023 shadcn
+
+License terms origin: `upstream-exact`; upstream path `LICENSE.md`; Git blob `fad4d887a681dd49233e5ed01ee2c7a1513089a0`; SHA-256 `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f`
+
+License terms: `third_party/licenses/shadcn-ui-MIT.txt` (1063 bytes, SHA-256 `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f`, Git blob `fad4d887a681dd49233e5ed01ee2c7a1513089a0`)
+
+Upstream license evidence:
+
+- `LICENSE.md`: https://github.com/shadcn-ui/ui/blob/56161142f1b83f612462772d18883807b5f0d601/LICENSE.md; Git blob `fad4d887a681dd49233e5ed01ee2c7a1513089a0`; SHA-256 `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f`
+
+Local modifications:
+
+- mcp.md and the five rules/*.md files are exact upstream blobs.
+- cli.md changes two internal links; customization.md changes one equivalent internal link.
+- Upstream SKILL.md is stored as official-shadcn-ui-workflow.md with frontmatter removed and a local source note added.
+- The local root SKILL.md is a project-aware wrapper for web/default and Bun.
+- UPSTREAM.txt is local provenance metadata.
+- Upstream agents/openai.yml, PNG assets, and evals/evals.json are omitted.
+
+### `vercel-react-best-practices`
+
+Name: Vercel React Best Practices
+
+Repository: https://github.com/vercel-labs/agent-skills
+
+Pinned revision: `e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff`
+
+Commit tree Git SHA-1: `70bacf782cbb14439193af23bc870e2118c4f6a0`
+
+Upstream source: `skills/react-best-practices` at tree `079b06a135401704ea94ab74c7c9d86c92ba259f`
+
+Local source: `.agents/skills/vercel-react-best-practices` at tree `71600b94d46e8ad1cec42502be000f038d5d514b`
+
+License: `MIT`
+
+Attribution: Vercel Engineering; metadata author: vercel; originally created by @shuding at Vercel
+
+Source license note: The pinned source identifies MIT in README.md and SKILL.md but contains no standalone LICENSE, LICENCE, COPYING, NOTICE, or formal copyright line.
+
+License terms origin: `locally-assembled-standard-text`; declaration paths `README.md`, `skills/react-best-practices/SKILL.md`
+License terms origin note: Pinned source declares MIT but provides no standalone terms file; the local file reproduces standard MIT terms and preserves source attribution without inventing a copyright line.
+
+License terms: `third_party/licenses/vercel-react-best-practices-MIT.txt` (1384 bytes, SHA-256 `c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f`, Git blob `a7dc2993e184dd879dde90e4e387ea8b4b0aa896`)
+
+Upstream license evidence:
+
+- `README.md`: https://github.com/vercel-labs/agent-skills/blob/e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff/README.md; Git blob `48c1db2dca60874f3f1e01928a0a70e2002212ca`; SHA-256 `9af6cf8f42cc5bf0594849f5ca7e06d645087a142fbfd4fcb614bf7fbafd41b2`; The License section identifies MIT.
+- `skills/react-best-practices/SKILL.md`: https://github.com/vercel-labs/agent-skills/blob/e1f1e7b0c43f2065754cdb7a66897f0c3e8278ff/skills/react-best-practices/SKILL.md; Git blob `1ad7750e572f8e28ce21090dc1049fa7eecd8cae`; SHA-256 `61860fd4249cf5e5ec917a08aceebed48ccf9b38d526e3cb73e0b18aaf261dac`; Frontmatter identifies license MIT and metadata author vercel.
+
+Copied content: `.agents/skills/vercel-react-best-practices/references/full-guide.md` from `skills/react-best-practices/AGENTS.md` (81716 bytes, Git blob `db951abe78a833270dc3292fdaaef15d03b6b1c1`, SHA-256 `be5257266331a38b025243e813b6dfe2b50659a9b7990a3556c1110cfc9d5e91`)
+
+Local modifications:
+
+- references/full-guide.md is an exact copy of the pinned upstream AGENTS.md blob.
+- The local SKILL.md is a shorter project wrapper that points to the full guide.
 
 ## Electron Distribution Evidence
 
@@ -5194,6 +5275,38 @@ INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PA
 PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
 FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+````
+
+### `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f`
+
+Kinds: license
+
+Used by:
+
+- `vendored/source:shadcn-ui-agent-skill:third_party/licenses/shadcn-ui-MIT.txt`
+
+````text
+MIT License
+
+Copyright (c) 2023 shadcn
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ````
 
 ### `162413c61e0982abe89a06bf7a02ec760dc49a7364d838bd9f01daebb5b95954`
@@ -21854,6 +21967,42 @@ Used by:
 The MIT License (MIT)
 
 Copyright (c) Microsoft
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+````
+
+### `c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f`
+
+Kinds: license
+
+Used by:
+
+- `vendored/source:vercel-react-best-practices:third_party/licenses/vercel-react-best-practices-MIT.txt`
+
+````text
+MIT License
+
+Source notice: the pinned upstream revision identifies this material as MIT
+licensed but contains no standalone license file or formal copyright line.
+Its metadata attributes the material to Vercel Engineering and states that it
+was originally created by @shuding at Vercel. Those attributions are preserved
+in NOTICE and THIRD-PARTY-LICENSES.md.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

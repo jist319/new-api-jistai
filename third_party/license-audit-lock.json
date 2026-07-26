@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Pins every source and tool input used to audit the tracked third-party license bundle.",
+  "toolchain": {
+    "bun": "1.3.11",
+    "go": "1.26.1",
+    "node": "24.18.0",
+    "npm": "11.16.0"
+  },
+  "inputs": [
+    {
+      "path": ".gitattributes",
+      "bytes": 1108,
+      "sha256": "946b2796ab3da8ec9743c8cbc7295f4b9c0d39f327b9b824a5c5048d09dd72f8"
+    },
+    {
+      "path": "bin/license-audit/base-overrides.json",
+      "bytes": 2010,
+      "sha256": "a131d79b9e6c5a7c0faca645722e570977f71481e7d102601e4b769525d2f2c6"
+    },
+    {
+      "path": "bin/license-audit/build-overrides.cjs",
+      "bytes": 14264,
+      "sha256": "917b92a0159e86ebd40a8150d1b35f9a78173cf36cff6a31dd70ab7414ab0b6d"
+    },
+    {
+      "path": "bin/license-audit/generate-third-party.cjs",
+      "bytes": 37048,
+      "sha256": "73daeb8d1e0942c50940b721c986587401ce9bf8c3d7698d2279a5d58e5a4da3"
+    },
+    {
+      "path": "bin/license-audit/license-lock.cjs",
+      "bytes": 11172,
+      "sha256": "c18c7401873c789773c337f367110102063f7b8e3d0c41a911dfc8caaf5689fb"
+    },
+    {
+      "path": "bin/license-audit/run.sh",
+      "bytes": 5389,
+      "sha256": "ccf5acf226ef63d29f3dbfbeb5353cb80020a08603619e44b674ec828d1eff15"
+    },
+    {
+      "path": "bin/license-audit/scan-go.go",
+      "bytes": 7708,
+      "sha256": "0fc6e1cb85cc3692f52cf7c77a656494f17a7c16ef9b2a705a15931446f9f806"
+    },
+    {
+      "path": "bin/license-audit/scan-node.cjs",
+      "bytes": 15074,
+      "sha256": "d9d5f22e216b49cbe76684c435956f9a9f71ebf3b1cd5520b41f842d9075ade0"
+    },
+    {
+      "path": "bin/license-audit/scan-node.test.cjs",
+      "bytes": 8975,
+      "sha256": "aada6ca47690cab2883723d767a43d10a4171ad6d12a1aef290f4a5518ffac96"
+    },
+    {
+      "path": "bin/license-audit/scan-vendored-sources.cjs",
+      "bytes": 20455,
+      "sha256": "ce2b52cfeecbb674e52a2206dd28eadb7699a6fdcd79655c59dbaa98327b5b3e"
+    },
+    {
+      "path": "electron/package-lock.json",
+      "bytes": 175377,
+      "sha256": "a1277a240478c937774cf09e7f7f92b628c829043adb5891b63f4d0300499975"
+    },
+    {
+      "path": "electron/package.json",
+      "bytes": 4509,
+      "sha256": "48c98adead72979b0017c07f3eff6d6c388e46756a568ecf95ca691b820643b7"
+    },
+    {
+      "path": "go.mod",
+      "bytes": 7115,
+      "sha256": "bcdad847977501b84c3f5b88167737752537cf6249878c1339ad2543bd05b29a"
+    },
+    {
+      "path": "go.sum",
+      "bytes": 310633,
+      "sha256": "bc70657bb7a6802a0ff21fecb4596bebe6f0eb208ddf9bad16c2007389cda412"
+    },
+    {
+      "path": "third_party/licenses/shadcn-ui-MIT.txt",
+      "bytes": 1063,
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f"
+    },
+    {
+      "path": "third_party/licenses/vercel-react-best-practices-MIT.txt",
+      "bytes": 1384,
+      "sha256": "c3a2d1fcb3468bdfc06f3a8b29d1914e6a0b9e8635b2f60a849ed980aa99146f"
+    },
+    {
+      "path": "VENDORED-SOURCES.json",
+      "bytes": 5260,
+      "sha256": "3e94ffaf425530e7b6928013a41732bcd2720a2e45774f291fc20a77ff8d5bc0"
+    },
+    {
+      "path": "web/bun.lock",
+      "bytes": 359614,
+      "sha256": "70627372e1cce9ad54ca6f0f47eaa0648573b1d5a9f3b8ad02c0e8a85e8a9685"
+    },
+    {
+      "path": "web/classic/package.json",
+      "bytes": 2697,
+      "sha256": "1e039df1ace95d0f53d76df7e43b04c74c56a4018ac79d303ef23c28a62efbf2"
+    },
+    {
+      "path": "web/default/package.json",
+      "bytes": 3502,
+      "sha256": "9777fc12259d2e2c34b39c411dabc6be516460823905c1e4039f38d6674b9473"
+    },
+    {
+      "path": "web/package.json",
+      "bytes": 628,
+      "sha256": "1c6e0306dfb8bebda13c6c43fd8b3fc94f6ce9f99f8e087ad8e37595c1003c02"
+    }
+  ],
+  "output": {
+    "path": "THIRD-PARTY-LICENSES.md",
+    "bytes": 1529739,
+    "sha256": "297414c442eb72aa65381d29b0bf3bf0d9d2ab567ed6f80fbd499b42f91d1f4a"
+  },
+  "audit": {
+    "report": {
+      "bytes": 878374,
+      "sha256": "8942de30c7fcef51769e13ead4ed204b5e96562a49881852f4d0dbc142c93db9"
+    },
+    "counts": {
+      "evidenceTexts": 611,
+      "inventoryRows": 1311,
+      "overridesUsed": 83,
+      "uniqueCoordinates": 1105,
+      "vendoredSources": 2
+    },
+    "issueCount": 0,
+    "warningCount": 0,
+    "evidenceGapCount": 0,
+    "overrideRequirementCount": 0
+  }
+}
