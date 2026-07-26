@@ -6,6 +6,20 @@
 /.env.*
 **/.env
 **/.env.*
+**/.npmrc
+**/.netrc
+**/.pypirc
+**/.git-credentials
+**/.docker/config.json
+**/*.pem
+**/*.key
+**/*.p12
+**/*.pfx
+**/*.crt
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+**/id_rsa*
 /data
 /logs
 *.md
@@ -20,4 +34,6 @@ docs
 /web/default/dist
 /web/classic/node_modules
 /web/classic/dist
+/electron/node_modules
+/electron/dist
 !THIRD-PARTY-LICENSES.md

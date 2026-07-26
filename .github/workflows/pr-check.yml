@@ -2,8 +2,8 @@ name: PR Check
 
 permissions:
   contents: read
-  issues: read
-  pull-requests: read
+  issues: write
+  pull-requests: write
 
 on:
   pull_request_target:
@@ -19,7 +19,7 @@ jobs:
           require-description: true
 
           # require-linked-issue: false
-          blocked-terms:  |
+          blocked-terms: |
             🤖 Generated with Claude Code
 
           require-pr-template: true
