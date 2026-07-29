@@ -11,7 +11,7 @@ const PURPOSE =
   'Pins every source and tool input used to audit the tracked third-party license bundle.';
 const TOOLCHAIN = Object.freeze({
   bun: '1.3.11',
-  go: '1.26.1',
+  go: '1.26.5',
   node: '24.18.0',
   npm: '11.16.0',
 });

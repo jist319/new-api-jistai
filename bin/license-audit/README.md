@@ -4,7 +4,7 @@ This directory contains the deterministic audit chain for
 `THIRD-PARTY-LICENSES.md`. It scans the exact Go, Bun, npm, and vendored-source
 closures from a canonical `git archive` of `HEAD`.
 
-Required tool versions are Go 1.26.1, Bun 1.3.11, Node.js 24.18.0, and npm
+Required tool versions are Go 1.26.5, Bun 1.3.11, Node.js 24.18.0, and npm
 11.16.0. Dependency downloads use only the registries and revisions pinned by
 the repository lockfiles. The runner clears package-manager authentication
 variables and uses an empty npm user configuration.

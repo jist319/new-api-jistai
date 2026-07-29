@@ -23,8 +23,8 @@ for command in git tar go bun node npm; do
   }
 done
 
-[[ "$(go env GOVERSION)" == "go1.26.1" ]] || {
-  echo "license audit requires Go 1.26.1" >&2
+[[ "$(go env GOVERSION)" == "go1.26.5" ]] || {
+  echo "license audit requires Go 1.26.5" >&2
   exit 1
 }
 [[ "$(bun --version)" == "1.3.11" ]] || {
