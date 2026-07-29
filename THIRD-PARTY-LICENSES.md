@@ -11,7 +11,7 @@ It must be distributed with Docker images, standalone binaries, frontend bundles
 | `default-1.json` | 1154407 | `e4426909c198af5150fa011f595215a29056be4c23174c59bb5b613a13bab704` |
 | `electron-1.json` | 990961 | `f1d9d9df02506c4281387235181782990d1ed9d172114e88f8b122cff878f0cf` |
 | `generate-third-party.cjs` | 37048 | `73daeb8d1e0942c50940b721c986587401ce9bf8c3d7698d2279a5d58e5a4da3` |
-| `go-1.json` | 891075 | `03580e7f41b89362077cbf339b2141654e3b96d6ed1ee05af2d51d184e79a78d` |
+| `go-1.json` | 891075 | `7656c7105788402acaa957fcbfed609d47562ce0d598312d3bac799c278bfc71` |
 | `license-overrides.complete-1.json` | 242168 | `5f968ec6156df2aeef872d3afd56747090f6445e2c68ae80f99333eb9434bb0b` |
 | `scan-vendored-sources.cjs` | 20455 | `ce2b52cfeecbb674e52a2206dd28eadb7699a6fdcd79655c59dbaa98327b5b3e` |
 | `third_party/licenses/shadcn-ui-MIT.txt` | 1063 | `1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f` |
@@ -157,11 +157,11 @@ It must be distributed with Docker images, standalone binaries, frontend bundles
 | backend | transitive | Go | `golang.org/x/arch` | `v0.21.0` | BSD-3-Clause-like | `h1:iTC9o7+wP6cPWpDWkivCvQFGAHDQ59SrSxsLPcnkArw=; h1:dNHoOeKiyja7GTvF9NJS1l3Z2yntpQNzgrjh1cU103A=` | `8cda009bd927676a95ee7ce2dae921442ac4d9584d041b56ecfcba6839032f0b`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | direct | Go | `golang.org/x/crypto` | `v0.52.0` | BSD-3-Clause-like | `h1:RMs7fP2rXdep0CftQlK8Uf+kibLm7qkCcradZWYz988=; h1:1QgfPxDqh0T2M/elOJtp9RvuR95kVjir0e6/BvEmGbc=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | transitive | Go | `golang.org/x/exp` | `v0.0.0-20250620022241-b7579e27df2b` | BSD-3-Clause-like | `h1:M2rDM6z3Fhozi9O7NWsxAkg/yqS/lQJ6PmkyIV3YP+o=; h1:3//PLf8L/X+8b4vuAfHzxeRUl04Adcb341+IGKfnqS8=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
-| backend | direct | Go | `golang.org/x/image` | `v0.41.0` | BSD-3-Clause-like | `h1:8wS72eGJMJaBxK6okTzd4WaXumUlTVlb753MlsSvTCo=; h1:uIc348UZMSvS5Z65CVZ7iDPaNobNFEPeJ4kbqTOszmA=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
+| backend | direct | Go | `golang.org/x/image` | `v0.43.0` | BSD-3-Clause-like | `h1:FLxcP4ec2350nTfOC8ysKtqYSIFbk/QGjw1ZHNP4tsY=; h1:rrpelvGFt+kLPAjPM4HeWPgrl0FtafueU//e5N0qk/Q=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | direct | Go | `golang.org/x/net` | `v0.55.0` | BSD-3-Clause-like | `h1:bcvxaJn3e1U6InsFWt1JUq1aSjnRxLzT2rtD2KfkDF8=; h1:L5U2KuzuOe1lY7Z+aWVIKK6qEeJXnXV9yzGA+WCHJww=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
-| backend | direct | Go | `golang.org/x/sync` | `v0.20.0` | BSD-3-Clause-like | `h1:e0PTpb7pjO8GAtTs2dQ6jYa5BWYlMuX047Dco/pItO4=; h1:9xrNwdLfx4jkKbNva9FpL6vEN7evnE43NNNJQ2LF3+0=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
+| backend | direct | Go | `golang.org/x/sync` | `v0.21.0` | BSD-3-Clause-like | `h1:HLII4xRRTtCRkxYp4HNFF0Js/Og6q2i++KXbg0gHCwM=; h1:9xrNwdLfx4jkKbNva9FpL6vEN7evnE43NNNJQ2LF3+0=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | direct | Go | `golang.org/x/sys` | `v0.45.0` | BSD-3-Clause-like | `h1:dO4czNzziLiiXplLQgBCEpCvXQ3dnkn0SdaZSYdQ+FY=; h1:4GL1E5IUh+htKOUEOaiffhrAeqysfVGipDYzABqnCmw=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
-| backend | direct | Go | `golang.org/x/text` | `v0.37.0` | BSD-3-Clause-like | `h1:Cqjiwd9eSg8e0QAkyCaQTNHFIIzWtidPahFWR83rTrc=; h1:a5sjxXGs9hsn/AJVwuElvCAo9v8QYLzvavO5z2PiM38=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
+| backend | direct | Go | `golang.org/x/text` | `v0.39.0` | BSD-3-Clause-like | `h1:UbZz4pLOvn600D6Oh6GGEI6VAmndrEBLv8/6BEXzyus=; h1:3UwRclnC2g0TU9x8PZiyfOajCd1zaUNHF9cvqcQZ+ZM=` | `911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | transitive | Go | `google.golang.org/protobuf` | `v1.36.5` | BSD-3-Clause-like | `h1:tPhr+woSbjfYvY6/GPufUoYizxw1cF/yFoxJ2fmpwlM=; h1:9fA7Ob0pmnwhb644+1+CVWFRbNajQ6iRojtC/QF5bRE=` | `4835612df0098ca95f8e7d9e3bffcb02358d435dbb38057c844c99d7f725eb20`<br>`96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc` |
 | backend | direct | Go | `gopkg.in/yaml.v3` | `v3.0.1` | Apache-2.0 | `h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=; h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=` | `d18f6323b71b0b768bb5e9616e36da390fbd39369a81807cca352de4e4e6aa0b`<br>`f6c2dd3a67b576eafb89b80200b8b1627230bf3821a0c14cb99a22ac19107d00` |
 | backend | direct | Go | `gorm.io/driver/clickhouse` | `v0.6.0` | MIT | `h1:nyhaeQ92qFEqf47B5N/vwPnnqV2DAuSHPC0QmlZrVZI=; h1:UtkbKNA4ibWTCzVkuFY80hBsb82nTH335JUVUKvT9YY=` | `41b86ad073252cf3f202496e414a288255d8a7be64cd2bf31071806115089e04`<br>`59f62caa972078dc1664ce928b5e5d51b78633fc43b78894d2dab83bc504edee` |
@@ -16998,11 +16998,11 @@ Used by:
 
 - `backend:golang.org/x/crypto@v0.52.0:LICENSE`
 - `backend:golang.org/x/exp@v0.0.0-20250620022241-b7579e27df2b:LICENSE`
-- `backend:golang.org/x/image@v0.41.0:LICENSE`
+- `backend:golang.org/x/image@v0.43.0:LICENSE`
 - `backend:golang.org/x/net@v0.55.0:LICENSE`
-- `backend:golang.org/x/sync@v0.20.0:LICENSE`
+- `backend:golang.org/x/sync@v0.21.0:LICENSE`
 - `backend:golang.org/x/sys@v0.45.0:LICENSE`
-- `backend:golang.org/x/text@v0.37.0:LICENSE`
+- `backend:golang.org/x/text@v0.39.0:LICENSE`
 
 ````text
 Copyright 2009 The Go Authors.
@@ -17430,11 +17430,11 @@ Used by:
 - `backend:golang.org/x/arch@v0.21.0:PATENTS`
 - `backend:golang.org/x/crypto@v0.52.0:PATENTS`
 - `backend:golang.org/x/exp@v0.0.0-20250620022241-b7579e27df2b:PATENTS`
-- `backend:golang.org/x/image@v0.41.0:PATENTS`
+- `backend:golang.org/x/image@v0.43.0:PATENTS`
 - `backend:golang.org/x/net@v0.55.0:PATENTS`
-- `backend:golang.org/x/sync@v0.20.0:PATENTS`
+- `backend:golang.org/x/sync@v0.21.0:PATENTS`
 - `backend:golang.org/x/sys@v0.45.0:PATENTS`
-- `backend:golang.org/x/text@v0.37.0:PATENTS`
+- `backend:golang.org/x/text@v0.39.0:PATENTS`
 - `backend:google.golang.org/protobuf@v1.36.5:PATENTS`
 
 ````text

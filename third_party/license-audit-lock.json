@@ -3,7 +3,7 @@
   "purpose": "Pins every source and tool input used to audit the tracked third-party license bundle.",
   "toolchain": {
     "bun": "1.3.11",
-    "go": "1.26.1",
+    "go": "1.26.5",
     "node": "24.18.0",
     "npm": "11.16.0"
   },
@@ -31,12 +31,12 @@
     {
       "path": "bin/license-audit/license-lock.cjs",
       "bytes": 11172,
-      "sha256": "c18c7401873c789773c337f367110102063f7b8e3d0c41a911dfc8caaf5689fb"
+      "sha256": "52b69b703e075d1790f73ae4be10d2a92bad9e3dff179b9decaeb7e73767887c"
     },
     {
       "path": "bin/license-audit/run.sh",
       "bytes": 5389,
-      "sha256": "ccf5acf226ef63d29f3dbfbeb5353cb80020a08603619e44b674ec828d1eff15"
+      "sha256": "da272201ca0a1e079a60382b3c681bc71e7da4204f64b8dbe51fcb03213f540e"
     },
     {
       "path": "bin/license-audit/scan-go.go",
@@ -70,13 +70,13 @@
     },
     {
       "path": "go.mod",
-      "bytes": 7115,
-      "sha256": "bcdad847977501b84c3f5b88167737752537cf6249878c1339ad2543bd05b29a"
+      "bytes": 7117,
+      "sha256": "f757bfedcab524a454827416a0710b0166507af2c8110f324c552855501aca54"
     },
     {
       "path": "go.sum",
-      "bytes": 310633,
-      "sha256": "bc70657bb7a6802a0ff21fecb4596bebe6f0eb208ddf9bad16c2007389cda412"
+      "bytes": 310454,
+      "sha256": "66d268321601165d8151aac26632dbc4c58794ccc57a698b9fee694e4713d348"
     },
     {
       "path": "third_party/licenses/shadcn-ui-MIT.txt",
@@ -117,12 +117,12 @@
   "output": {
     "path": "THIRD-PARTY-LICENSES.md",
     "bytes": 1529739,
-    "sha256": "297414c442eb72aa65381d29b0bf3bf0d9d2ab567ed6f80fbd499b42f91d1f4a"
+    "sha256": "716f43af4552e07bcdbf677799b0921aff96100596a626ebce95f00342ac150d"
   },
   "audit": {
     "report": {
       "bytes": 878374,
-      "sha256": "8942de30c7fcef51769e13ead4ed204b5e96562a49881852f4d0dbc142c93db9"
+      "sha256": "5992e2301535c7f5193405bdad90448b7c3c977edf5f234dae06e3af65c4101c"
     },
     "counts": {
       "evidenceTexts": 611,
