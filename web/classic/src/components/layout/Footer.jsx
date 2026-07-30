@@ -209,7 +209,7 @@ const FooterBar = () => {
             </a>
             <span aria-hidden='true'> · </span>
             <a
-              href='https://github.com/liuyingcai/new-api-jistai'
+              href='https://github.com/jist319/new-api-jistai'
               target='_blank'
               rel='noopener noreferrer'
               className='!text-semi-color-primary font-medium'
@@ -251,7 +251,7 @@ const FooterBar = () => {
               </a>
               <span aria-hidden='true'> · </span>
               <a
-                href='https://github.com/liuyingcai/new-api-jistai'
+                href='https://github.com/jist319/new-api-jistai'
                 target='_blank'
                 rel='noopener noreferrer'
                 className='!text-semi-color-primary font-medium'

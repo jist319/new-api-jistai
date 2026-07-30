@@ -53,7 +53,7 @@ RUN VERSION=$(tr -d '\r\n' < VERSION) \
 FROM gcr.io/distroless/static-debian12:nonroot@sha256:f5b485ea962d9bd1186b2f6b3a061191539b905b82ec395de78cbfae51f20e35
 
 LABEL org.opencontainers.image.licenses="AGPL-3.0-or-later" \
-      org.opencontainers.image.source="https://github.com/liuyingcai/new-api-jistai"
+      org.opencontainers.image.source="https://github.com/jist319/new-api-jistai"
 
 COPY --from=builder2 /build/new-api /
 COPY --from=builder2 /build/healthcheck /

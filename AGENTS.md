@@ -181,7 +181,7 @@ and deployments require separate explicit authorization.
 - Use `feature/<name>` branches. Concurrent coding agents require independent
   Git worktrees and must not edit the same file. Sub-agents commit only their
   own branch; the main agent reviews diffs and tests before integration.
-- Keep `origin` pointed at `liuyingcai/new-api-jistai` and `upstream` pointed at
+- Keep `origin` pointed at `jist319/new-api-jistai` and `upstream` pointed at
   `QuantumNous/new-api`. Do not use unrelated-history merges, force pushes,
   hard resets, or overwrite `main`.
 - The primary managed workspace stores usable Git metadata in `.gitmeta` and

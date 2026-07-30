@@ -138,7 +138,7 @@ function ProjectAttribution(props: { currentYear: number; inline?: boolean }) {
       </a>
       . {t(NEW_API_FOOTER_ATTRIBUTION_KEY)} <span aria-hidden='true'>·</span>{' '}
       <a
-        href='https://github.com/liuyingcai/new-api-jistai'
+        href='https://github.com/jist319/new-api-jistai'
         target='_blank'
         rel='noopener noreferrer'
         className='text-foreground/70 hover:text-foreground font-medium transition-colors'

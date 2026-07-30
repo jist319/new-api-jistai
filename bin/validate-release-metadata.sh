@@ -52,7 +52,7 @@ fi
 
 grep -Fq 'https://github.com/QuantumNous/new-api' NOTICE \
   || fail NOTICE 'Required upstream attribution link is missing'
-grep -Fq 'https://github.com/liuyingcai/new-api-jistai' NOTICE \
+grep -Fq 'https://github.com/jist319/new-api-jistai' NOTICE \
   || fail NOTICE 'Required JistAI corresponding-source link is missing'
 
 command -v node >/dev/null 2>&1 \

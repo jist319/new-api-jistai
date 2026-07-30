@@ -453,7 +453,7 @@ docker run --name new-api -d --restart always \
 本仓库是基于 `QuantumNous/new-api v1.0.0-rc.21` 的 JistAI 修改版本，包含
 JistAI 首页和模型请求并发限制功能。对应的公开源代码仓库为：
 
-[https://github.com/liuyingcai/new-api-jistai](https://github.com/liuyingcai/new-api-jistai)
+[https://github.com/jist319/new-api-jistai](https://github.com/jist319/new-api-jistai)
 
 修改版本仍按 AGPLv3 发布；请同时阅读仓库中的 `LICENSE`、`NOTICE` 和
 `THIRD-PARTY-LICENSES.md`。

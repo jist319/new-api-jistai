@@ -25,7 +25,7 @@ candidate.
 
 The public source repository for this corresponding version is:
 
-https://github.com/liuyingcai/new-api-jistai
+https://github.com/jist319/new-api-jistai
 
 This branch may contain release-candidate changes that have not been deployed.
 Before a new version is deployed, its exact final Git commit must be published
